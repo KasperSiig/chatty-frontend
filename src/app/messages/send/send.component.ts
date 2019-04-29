@@ -9,18 +9,24 @@ import {Message} from '../../shared/models/Message';
 })
 export class SendComponent implements OnInit {
 
-  Message: Message;
+  message: Message;
 
   constructor(private messageService: MessageService) { }
 
   ngOnInit() {
   }
 
-  send(message: string, sender: string) {
-    this.Message.content = message;
-    this.Message.sender = sender;
-    this.messageService.send(this.Message);
-
+  /**
+   * Sends message content and name of sender to MessageService
+   * @param message
+   * @param sender
+   */
+  send(message: string, sender: string)  {
+    this.message = new Message();
+    this.message.content = message;
+    this.message.sender = sender;
+    this.messageService.send(this.message);
+    console.log(this.message.content + ', ' + this.message.sender);
   }
 
 }
