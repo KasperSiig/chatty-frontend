@@ -8,6 +8,7 @@ import { HeaderComponent } from './shared/header/header.component';
 import { ChatComponent } from './chat/chat.component';
 import { MessageComponent } from './messages/message/message.component';
 import { SendComponent } from './messages/send/send.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { SendComponent } from './messages/send/send.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
