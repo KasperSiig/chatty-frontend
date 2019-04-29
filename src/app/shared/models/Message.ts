@@ -1,6 +1,6 @@
 export class Message {
   id?: string;
-  message: string;
-  time: Date;
+  content: string;
+  time: number;
   sender: string;
 }
