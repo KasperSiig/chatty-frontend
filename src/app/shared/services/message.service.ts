@@ -19,8 +19,6 @@ export class MessageService {
    */
   send(message: Message): Observable<Message> {
     message.time = new Date().getTime();
-    const time = formatDate(message.time, 'hh:mm', 'en-US');
-    console.log(message.content + ', ' + message.sender + ', ' + time);
     return this.http.post<any>(environment.apiUrl + '/message', message);
   }
 }

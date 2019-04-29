@@ -26,7 +26,6 @@ export class SendComponent implements OnInit {
     this.message.content = message;
     this.message.sender = sender;
     this.messageService.send(this.message);
-    console.log(this.message.content + ', ' + this.message.sender);
   }
 
 }
