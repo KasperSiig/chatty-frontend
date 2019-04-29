@@ -1,0 +1,54 @@
+.container {
+  width: 100%
+}
+ .inputChat {
+   width: 90%
+ }
+
+ .msgSend:hover {
+   color: white;
+   background: #444444;
+ }
+
+ .msgSend {
+   color: white;
+   font-size: 16px;
+   font-family: 'Raleway', sans-serif;
+   background: black;
+   width: 10%
+ }
+
+//Colors for the text field - not focused
+::ng-deep .mat-form-field {
+  .mat-input-element {
+    color: #505051;
+  }
+  .mat-form-field-label {
+    color: #505051;
+  }
+  .mat-form-field-underline {
+    background-color: #505051;
+  }
+  .mat-form-field-ripple {
+    background-color: #505051;
+  }
+  .mat-form-field-required-marker {
+    color: #505051;
+  }
+}
+
+//Color for the textfield focused
+::ng-deep .mat-form-field.mat-focused {
+  .mat-form-field-label {
+    color: black;
+  }
+  .mat-form-field-ripple {
+    background-color: black;
+  }
+  .mat-form-field-required-marker {
+    color: black;
+  }
+  .mat-input-element {
+    color: black;
+  }
+}
