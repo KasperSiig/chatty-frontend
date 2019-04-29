@@ -8,7 +8,7 @@ import { HeaderComponent } from './shared/header/header.component';
 import { ChatComponent } from './chat/chat.component';
 import { MessageComponent } from './messages/message/message.component';
 import { SendComponent } from './messages/send/send.component';
-import {MatButtonModule, MatInputModule} from '@angular/material';
+import {MatButtonModule, MatFormFieldModule, MatInputModule} from '@angular/material';
 import {FlexLayoutModule} from '@angular/flex-layout';
 
 @NgModule({
@@ -25,7 +25,8 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     BrowserAnimationsModule,
     FlexLayoutModule,
     MatButtonModule,
-    MatInputModule
+    MatInputModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]
