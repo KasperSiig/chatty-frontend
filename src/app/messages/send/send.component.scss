@@ -1,24 +1,29 @@
+//Container for the Textfield and Button
 .container {
   width: 100%
 }
- .inputChat {
-   width: 90%
- }
 
- .msgSend:hover {
-   color: white;
-   background: #444444;
- }
+//Textfield focued or not focused
+.inputChat {
+  width: 90%
+}
 
- .msgSend {
-   color: white;
-   font-size: 16px;
-   font-family: 'Raleway', sans-serif;
-   background: black;
-   width: 10%
- }
+//Send Button - hovered
+.msgSend:hover {
+  color: white;
+  background: #444444;
+}
 
-//Colors for the text field - not focused
+//Send Button - not hovered
+.msgSend {
+  color: white;
+  font-size: 16px;
+  font-family: 'Raleway', sans-serif;
+  background: black;
+  width: 10%
+}
+
+//Colors for the Textfield - not focused
 ::ng-deep .mat-form-field {
   .mat-input-element {
     color: #505051;
@@ -37,7 +42,7 @@
   }
 }
 
-//Color for the textfield focused
+//Color for the Textfield - focused
 ::ng-deep .mat-form-field.mat-focused {
   .mat-form-field-label {
     color: black;
