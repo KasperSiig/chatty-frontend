@@ -4,6 +4,7 @@ import { SendComponent } from './send.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MatButtonModule, MatFormFieldModule, MatInputModule,} from '@angular/material';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {HttpClientModule} from '@angular/common/http';
 
 describe('SendComponent', () => {
   let component: SendComponent;
@@ -17,11 +18,11 @@ describe('SendComponent', () => {
         MatButtonModule,
         MatInputModule,
         MatFormFieldModule,
+        HttpClientModule
       ],
       declarations: [
         SendComponent
       ]
-
     })
     .compileComponents();
   }));
