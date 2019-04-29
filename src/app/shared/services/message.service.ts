@@ -13,7 +13,7 @@ export class MessageService {
 
 
   /**
-   *Sets time and makes post request
+   * Sets time and makes post request
    * @param message
    */
   send(message: Message): Observable<Message> {
