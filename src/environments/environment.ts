@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://us-central1-chatty-238611.cloudfunctions.net/api',
+  apiUrl: 'http://localhost:5001/chatty-238611/us-central1/api',
   config: {
     apiKey: 'AIzaSyBrQWERBNwkTluzudNWc6-8s9xPWOkqpfI',
     authDomain: 'chatty-238611.firebaseapp.com',
