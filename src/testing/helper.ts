@@ -1,15 +1,15 @@
 import { Message } from '../app/shared/models/Message';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 
 export class Helper {
   messages: Message[] = [];
 
-  getMessages(amount: number): Observable<Message[]> {
+  getMessages(amount: number) {
     for (let i = 0; i < amount; i++) {
       this.messages.push(
         {id: 'ID Test', content: 'Content test', sender: 'Sender test', time: 123}
       );
     }
-    return of(this.messages);
+    return this.messages;
   }
 }

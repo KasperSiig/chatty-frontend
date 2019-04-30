@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from '../shared/services/message.service';
 import { Message } from '../shared/models/Message';
+import { Observable } from "rxjs";
 
 @Component({
   selector: 'app-chat',

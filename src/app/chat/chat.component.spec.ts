@@ -3,6 +3,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ChatComponent } from './chat.component';
 import { DOMHelper } from '../../testing/dom-helper';
 import { Helper } from '../../testing/helper';
+import { HttpClientModule } from '@angular/common/http';
+import { MessageService } from '../shared/services/message.service';
+import { of } from 'rxjs';
 
 describe('ChatComponent', () => {
   let component: ChatComponent;
@@ -10,10 +13,19 @@ describe('ChatComponent', () => {
 
   let dm: DOMHelper<ChatComponent>;
   let helper: Helper;
+  let messageServiceMock: any;
 
   beforeEach(async(() => {
+    messageServiceMock = jasmine.createSpyObj('MessageService', ['recieve']);
+    messageServiceMock.recieve.and.returnValue(of([]));
     TestBed.configureTestingModule({
-      declarations: [ChatComponent]
+      declarations: [ChatComponent],
+      imports: [
+        HttpClientModule
+      ],
+      providers: [
+        {provide: MessageService, useValue: messageServiceMock}
+      ]
     })
       .compileComponents();
   }));
