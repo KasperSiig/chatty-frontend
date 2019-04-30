@@ -1,5 +1,5 @@
-<div fxLayout="column"
-     fxLayoutGap="10px">
+<div class="container"
+     fxLayout="column">
   <div>
     <mat-card class="messageCard"
               fxLayout="column">
@@ -16,26 +16,24 @@
                alt="UserLogo">
         </mat-card-content>
         <span fxFlex="5%"></span>
-        <mat-card-subtitle>
+        <mat-card-content>
           <a class="username">
             BRUGERNAVN
           </a>
-        </mat-card-subtitle>
+        </mat-card-content>
         <span fxFlex="1 auto"></span>
         <div fxLayoutAlign="end">
-          <mat-card-subtitle>
+          <mat-card-content>
             <a class="date">
-              DATO
+              DATO/TID
             </a>
-          </mat-card-subtitle>
+          </mat-card-content>
         </div>
       </div>
-      <div>
-        <mat-card-content>
-          <span fxFlex="7.9%"></span>
-          <a class="message">BESKED HER</a>
-        </mat-card-content>
-      </div>
+      <mat-card-content>
+        <span fxFlex="7.9%"></span>
+        <a class="message">BESKED HER</a>
+      </mat-card-content>
     </mat-card>
   </div>
 </div>

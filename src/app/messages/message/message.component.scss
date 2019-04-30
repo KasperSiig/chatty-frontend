@@ -1,12 +1,21 @@
+.container {
+  height:70vh;
+  border: 1px dotted grey;
+}
+
 .messageCard {
-  background-color: transparent;
+  background-color: lightgray;
+  padding: 16px;
 }
 
 .date, .username{
+  color: #35B7AE;
+  font-weight: bold;
   font-size: 12px;
 }
 
 .message {
+  color: black;
   font-size: 12px;
 }
 
