@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { LoginComponent } from './login/login.component';
 import { ChatComponent } from './chat/chat.component';
-import { LoginComponent } from './login/login/login.component';
+import { LoggedInGuard } from './shared/guards/logged-in.guard';
 
 const routes: Routes = [
-  {path: '', component: LoginComponent, pathMatch: 'full'}
+  {path: '', component: ChatComponent, pathMatch: 'full', canActivate: [LoggedInGuard] },
+  {path: 'login', component: LoginComponent}
 ];
 
 @NgModule({
