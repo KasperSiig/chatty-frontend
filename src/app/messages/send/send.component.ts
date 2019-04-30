@@ -11,8 +11,7 @@ export class SendComponent implements OnInit {
 
   message: Message;
 
-  constructor(private messageService: MessageService) {
-  }
+  constructor(private messageService: MessageService) { }
 
   ngOnInit() {
   }
@@ -22,7 +21,7 @@ export class SendComponent implements OnInit {
    * @param message
    * @param sender
    */
-  send(message: string, sender: string) {
+  send(message: string, sender: string)  {
     this.message = new Message();
     this.message.content = message;
     this.message.sender = sender;

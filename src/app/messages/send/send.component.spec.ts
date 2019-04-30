@@ -1,11 +1,14 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { SendComponent } from './send.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DOMHelper } from '../../../testing/dom-helper';
 import { Helper } from '../../../testing/helper';
 import { of } from 'rxjs';
 import { MessageService } from '../../shared/services/message.service';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatButtonModule, MatFormFieldModule, MatInputModule, } from '@angular/material';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { MessageComponent } from '../message/message.component';
 
 describe('SendComponent', () => {
   let component: SendComponent;
@@ -19,12 +22,19 @@ describe('SendComponent', () => {
     messageServiceMock = jasmine.createSpyObj('MessageService', ['send']);
     messageServiceMock.send.and.returnValue(of([]));
     TestBed.configureTestingModule({
-      declarations: [ SendComponent ],
-      imports: [
-        HttpClientModule
-      ],
       providers: [
         {provide: MessageService, useValue: messageServiceMock}
+      ],
+      imports: [
+        BrowserAnimationsModule,
+        FlexLayoutModule,
+        MatButtonModule,
+        MatInputModule,
+        MatFormFieldModule,
+        HttpClientModule
+      ],
+      declarations: [
+        SendComponent
       ]
     })
     .compileComponents();

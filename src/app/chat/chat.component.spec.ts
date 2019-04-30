@@ -1,11 +1,15 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ChatComponent } from './chat.component';
 import { DOMHelper } from '../../testing/dom-helper';
 import { Helper } from '../../testing/helper';
 import { HttpClientModule } from '@angular/common/http';
 import { MessageService } from '../shared/services/message.service';
 import { of } from 'rxjs';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatButtonModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import { SendComponent } from '../messages/send/send.component';
+import { MessageComponent } from '../messages/message/message.component';
 
 describe('ChatComponent', () => {
   let component: ChatComponent;
@@ -19,12 +23,21 @@ describe('ChatComponent', () => {
     messageServiceMock = jasmine.createSpyObj('MessageService', ['recieve']);
     messageServiceMock.recieve.and.returnValue(of([]));
     TestBed.configureTestingModule({
-      declarations: [ChatComponent],
-      imports: [
-        HttpClientModule
-      ],
       providers: [
         {provide: MessageService, useValue: messageServiceMock}
+      ],
+      imports: [
+        BrowserAnimationsModule,
+        FlexLayoutModule,
+        MatButtonModule,
+        MatInputModule,
+        MatFormFieldModule,
+        HttpClientModule
+      ],
+      declarations: [
+        ChatComponent,
+        SendComponent,
+        MessageComponent
       ]
     })
       .compileComponents();

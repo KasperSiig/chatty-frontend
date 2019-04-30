@@ -1,0 +1,22 @@
+//Toolbar layout and color
+.container {
+  background: #BDAEC6;
+  margin: auto auto;
+}
+
+//Chatty Logo
+.imgLogo, .imgLogo:focus {
+  width: 75px;
+  height: 50px;
+  margin: 6px 50px;
+  border-color: transparent;
+  outline: 0;
+}
+
+//Avatar Logo
+.avatarLogo {
+  width: 40px;
+  height: 40px;
+  margin: 10px 50px;
+  border-radius: 100%;
+}

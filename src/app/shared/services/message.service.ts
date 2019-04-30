@@ -12,9 +12,7 @@ import { map } from 'rxjs/operators';
 export class MessageService {
 
   constructor(private http: HttpClient,
-              private db: AngularFirestore) {
-  }
-
+              private db: AngularFirestore) { }
 
   /**
    *Sets time and makes post request
