@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {MessageService} from '../../shared/services/message.service';
-import {Message} from '../../shared/models/Message';
+import { MessageService } from '../../shared/services/message.service';
+import { Message } from '../../shared/models/Message';
 
 @Component({
   selector: 'app-send',
@@ -11,7 +11,8 @@ export class SendComponent implements OnInit {
 
   message: Message;
 
-  constructor(private messageService: MessageService) { }
+  constructor(private messageService: MessageService) {
+  }
 
   ngOnInit() {
   }
@@ -21,7 +22,7 @@ export class SendComponent implements OnInit {
    * @param message
    * @param sender
    */
-  send(message: string, sender: string)  {
+  send(message: string, sender: string) {
     this.message = new Message();
     this.message.content = message;
     this.message.sender = sender;

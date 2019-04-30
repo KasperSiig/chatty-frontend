@@ -1,5 +1,5 @@
-import {Message} from '../app/shared/models/Message';
-import {Observable, of} from 'rxjs';
+import { Message } from '../app/shared/models/Message';
+import { Observable, of } from 'rxjs';
 
 export class Helper {
   messages: Message[] = [];

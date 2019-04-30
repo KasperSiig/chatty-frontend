@@ -1,21 +1,21 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ChatComponent } from './chat.component';
-import {DOMHelper} from '../../testing/dom-helper';
-import {Helper} from '../../testing/helper';
+import { DOMHelper } from '../../testing/dom-helper';
+import { Helper } from '../../testing/helper';
 
 describe('ChatComponent', () => {
   let component: ChatComponent;
   let fixture: ComponentFixture<ChatComponent>;
-  
+
   let dm: DOMHelper<ChatComponent>;
   let helper: Helper;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ChatComponent ]
+      declarations: [ChatComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
