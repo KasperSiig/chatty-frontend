@@ -1,3 +1,42 @@
-<p>
-  message works!
-</p>
+<div fxLayout="column"
+     fxLayoutGap="10px">
+  <div>
+    <mat-card class="messageCard"
+              fxLayout="column">
+      <span fxFlex="2%"></span>
+      <div fxLayout="row"
+           fxLayoutAlign="start center">
+        <mat-card-content
+          fxLayoutAlign="start center"
+          fxLayout="space-between">
+          <img fxLayout="column"
+               fxLayoutAlign="center center"
+               class="imgUserPic"
+               src="assets/imgs/Chattylogo.png"
+               alt="UserLogo">
+        </mat-card-content>
+        <span fxFlex="5%"></span>
+        <mat-card-subtitle>
+          <a class="username">
+            BRUGERNAVN
+          </a>
+        </mat-card-subtitle>
+        <span fxFlex="1 auto"></span>
+        <div fxLayoutAlign="end">
+          <mat-card-subtitle>
+            <a class="date">
+              DATO
+            </a>
+          </mat-card-subtitle>
+        </div>
+      </div>
+      <div>
+        <mat-card-content>
+          <span fxFlex="7.9%"></span>
+          <a class="message">BESKED HER</a>
+        </mat-card-content>
+      </div>
+    </mat-card>
+  </div>
+</div>
+
