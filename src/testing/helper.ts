@@ -4,6 +4,10 @@ import { of } from 'rxjs';
 export class Helper {
   messages: Message[] = [];
 
+  /**
+   * Creates an array of messages for testing.
+   * @param amount
+   */
   getMessages(amount: number) {
     for (let i = 0; i < amount; i++) {
       this.messages.push(
