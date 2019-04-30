@@ -7,7 +7,6 @@ import { HeaderComponent } from './shared/header/header.component';
 import { ChatComponent } from './chat/chat.component';
 import { MessageComponent } from './messages/message/message.component';
 import { SendComponent } from './messages/send/send.component';
-import { MatButtonModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireStorageModule } from '@angular/fire/storage';
@@ -34,7 +33,8 @@ import { environment } from '../environments/environment';
     HttpClientModule,
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.config),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    MatToolbarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
