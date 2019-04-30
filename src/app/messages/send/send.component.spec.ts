@@ -5,6 +5,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {MatButtonModule, MatFormFieldModule, MatInputModule,} from '@angular/material';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {HttpClientModule} from '@angular/common/http';
+import {MessageComponent} from '../message/message.component';
 
 describe('SendComponent', () => {
   let component: SendComponent;
