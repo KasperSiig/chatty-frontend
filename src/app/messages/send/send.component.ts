@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {MessageService} from '../../shared/services/message.service';
-import {Message} from '../../shared/models/Message';
+import { MessageService } from '../../shared/services/message.service';
+import { Message } from '../../shared/models/Message';
 
 @Component({
   selector: 'app-send',
