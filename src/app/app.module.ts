@@ -13,6 +13,8 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
+import { LoginComponent } from './login/login/login.component';
+import { MatButtonModule, MatFormFieldModule, MatInputModule, MatToolbarModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { environment } from '../environments/environment';
     HeaderComponent,
     ChatComponent,
     MessageComponent,
-    SendComponent
+    SendComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
