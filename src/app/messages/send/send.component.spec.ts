@@ -1,9 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SendComponent } from './send.component';
-import {HttpClientModule} from '@angular/common/http';
-import {DOMHelper} from '../../../testing/dom-helper';
-import {Helper} from '../../../testing/helper';
+import { HttpClientModule } from '@angular/common/http';
+import { DOMHelper } from '../../../testing/dom-helper';
+import { Helper } from '../../../testing/helper';
 import { of } from 'rxjs';
 import { MessageService } from '../../shared/services/message.service';
 
