@@ -3,6 +3,10 @@
   width: 100%
 }
 
+.spacer {
+  margin: 25px;
+}
+
 //Textfield focued or not focused
 .inputChat {
   width: 90%
@@ -11,7 +15,7 @@
 //Send Button - hovered
 .msgSend:hover {
   color: white;
-  background: #444444;
+  background: #7F95D1;
 }
 
 //Send Button - not hovered
@@ -19,41 +23,41 @@
   color: white;
   font-size: 16px;
   font-family: 'Raleway', sans-serif;
-  background: black;
+  background: #35B7AE;
   width: 10%
 }
 
 //Colors for the Textfield - not focused
 ::ng-deep .mat-form-field {
   .mat-input-element {
-    color: #505051;
+    color: #35B7AE;
   }
   .mat-form-field-label {
-    color: #505051;
+    color: Black;
   }
   .mat-form-field-underline {
-    background-color: #505051;
+    background-color: #35B7AE;
   }
   .mat-form-field-ripple {
-    background-color: #505051;
+    background-color: #35B7AE;
   }
   .mat-form-field-required-marker {
-    color: #505051;
+    color: #35B7AE;
   }
 }
 
 //Color for the Textfield - focused
 ::ng-deep .mat-form-field.mat-focused {
   .mat-form-field-label {
-    color: black;
+    color: Black;
   }
   .mat-form-field-ripple {
-    background-color: black;
+    background-color: #7F95D1;
   }
   .mat-form-field-required-marker {
-    color: black;
+    color: #7F95D1;
   }
   .mat-input-element {
-    color: black;
+    color: #7F95D1;
   }
 }
