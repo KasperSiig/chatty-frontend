@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from '../../shared/services/message.service';
-import { Message } from '../../shared/models/Message';
 
 @Component({
   selector: 'app-send',
@@ -9,23 +8,18 @@ import { Message } from '../../shared/models/Message';
 })
 export class SendComponent implements OnInit {
 
-  message: Message;
-
-  constructor(private messageService: MessageService) { }
+  constructor(private messageService: MessageService) {
+  }
 
   ngOnInit() {
   }
 
   /**
    * Sends message content and name of sender to MessageService
-   * @param message
-   * @param sender
+   * @param message Content of message to be sent
    */
-  send(message: string, sender: string)  {
-    this.message = new Message();
-    this.message.content = message;
-    this.message.sender = sender;
-    this.messageService.send(this.message);
+  send(message: string) {
+    this.messageService.send(message);
   }
 
 }

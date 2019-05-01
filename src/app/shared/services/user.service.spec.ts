@@ -6,6 +6,7 @@ import { AngularFireStorage, AngularFireStorageModule } from '@angular/fire/stor
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../../../environments/environment';
 import { of } from 'rxjs';
+import { User } from '../models/User';
 
 describe('UserService', () => {
   let angularFireStoreMock;
@@ -13,6 +14,9 @@ describe('UserService', () => {
   let angularFireStorageMock;
   let refMock;
   let service: UserService;
+  let localStorageMock;
+  let store;
+  let userMock;
   beforeEach(() => {
     // Mock AngularFirestore
     angularFireStoreMock = jasmine.createSpyObj('AngularFireStore', ['collection']);
@@ -25,6 +29,23 @@ describe('UserService', () => {
     refMock = jasmine.createSpyObj('ref', ['getDownloadURL']);
     angularFireStorageMock.ref.and.returnValue(refMock);
     refMock.getDownloadURL.and.returnValue(of('https://example.com/avatar1.png'));
+
+    store = { username: 'username'};
+    localStorageMock = {
+      getItem: (key: string): string => {
+        return store[key];
+      },
+      setItem: (key: string, value: string) => {
+        store[key] = value;
+      }
+    };
+
+    spyOn(localStorage, 'getItem').and.callFake(localStorageMock.getItem);
+    spyOn(localStorage, 'setItem').and.callFake(localStorageMock.setItem);
+
+    userMock = new User();
+    userMock.userName = 'username';
+    userMock.avatarUrl = 'https://example.com/avatar1.png';
 
     TestBed.configureTestingModule({
       imports: [
@@ -55,6 +76,15 @@ describe('UserService', () => {
       service.getAvatarDownloadURL('avatar1.png').subscribe(url => {
         expect(url).toBe('https://example.com/avatar1.png');
       });
+    });
+  });
+
+  describe('User', () => {
+    it('should get logged in user', () => {
+      localStorageMock.setItem('user', JSON.stringify(userMock));
+      const user = service.getUser();
+      expect(user.avatarUrl).toBe(userMock.avatarUrl);
+      expect(user.userName).toBe(userMock.userName);
     });
   });
 });
