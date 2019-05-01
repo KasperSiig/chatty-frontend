@@ -1,12 +1,12 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://us-central1-chatty-238611.cloudfunctions.net/api',
+  apiUrl: 'https://us-central1-chatty-b7a7e.cloudfunctions.net/api',
   config: {
     apiKey: 'AIzaSyBrQWERBNwkTluzudNWc6-8s9xPWOkqpfI',
-    authDomain: 'chatty-238611.firebaseapp.com',
-    databaseURL: 'https://chatty-238611.firebaseio.com',
-    projectId: 'chatty-238611',
-    storageBucket: 'chatty-238611.appspot.com',
+    authDomain: 'chatty-b7a7e.firebaseapp.com',
+    databaseURL: 'https://chatty-b7a7e.firebaseio.com',
+    projectId: 'chatty-b7a7e',
+    storageBucket: 'chatty-b7a7e.appspot.com',
     messagingSenderId: '911543914185'
   }
 };
