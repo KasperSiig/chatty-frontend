@@ -43,4 +43,11 @@ export class UserService {
   login(user: User) {
     localStorage.setItem('user', JSON.stringify(user));
   }
+  
+   /**
+   * Gets the user currently logged in
+   */
+  getUser(): User {
+    return JSON.parse(localStorage.getItem('user'));
+  }
 }

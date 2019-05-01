@@ -7,8 +7,7 @@ import { of } from 'rxjs';
 import { MessageService } from '../../shared/services/message.service';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule, MatFormFieldModule, MatInputModule, } from '@angular/material';
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { MessageComponent } from '../message/message.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('SendComponent', () => {
   let component: SendComponent;
@@ -37,7 +36,7 @@ describe('SendComponent', () => {
         SendComponent
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -53,7 +52,7 @@ describe('SendComponent', () => {
   });
 
   it('should call send in component one time', () => {
-    component.send('test message', 'test sender');
+    component.send('test message');
     fixture.detectChanges();
     expect(messageServiceMock.send).toHaveBeenCalledTimes(1);
   });
