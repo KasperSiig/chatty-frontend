@@ -13,6 +13,8 @@ describe('UserService', () => {
   let angularFireStorageMock;
   let refMock;
   let service: UserService;
+  let localStorageMock;
+  let store;
   beforeEach(() => {
     // Mock AngularFirestore
     angularFireStoreMock = jasmine.createSpyObj('AngularFireStore', ['collection']);
@@ -25,6 +27,19 @@ describe('UserService', () => {
     refMock = jasmine.createSpyObj('ref', ['getDownloadURL']);
     angularFireStorageMock.ref.and.returnValue(refMock);
     refMock.getDownloadURL.and.returnValue(of('https://example.com/avatar1.png'));
+
+    store = { username: 'username'};
+    localStorageMock = {
+      getItem: (key: string): string => {
+        return store[key];
+      },
+      setItem: (key: string, value: string) => {
+        store[key] = value;
+      }
+    };
+
+    spyOn(localStorage, 'getItem').and.callFake(localStorageMock.getItem);
+    spyOn(localStorage, 'setItem').and.callFake(localStorageMock.setItem);
 
     TestBed.configureTestingModule({
       imports: [
@@ -57,4 +72,15 @@ describe('UserService', () => {
       });
     });
   });
+
+  describe('User', () => {
+    it('should be logged in', () => {
+      const userMock = {
+        userName: 'username',
+        avatarUrl: 'https://example.com/avatar1.png'
+      };
+      service.login(userMock);
+      expect(localStorageMock.getItem('user')).toBe(JSON.stringify(userMock));
+    });
+  })
 });
