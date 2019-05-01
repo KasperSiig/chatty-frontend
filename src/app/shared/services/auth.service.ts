@@ -12,6 +12,6 @@ export class AuthService {
    */
   isLoggedIn(): boolean {
     console.log(localStorage);
-    return !!JSON.parse(localStorage.getItem('username'));
+    return !!JSON.parse(localStorage.getItem('user'));
   }
 }

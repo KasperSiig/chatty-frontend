@@ -33,7 +33,7 @@ export class UserService {
    * @param fileName Name of avatar file
    */
   getAvatarDownloadURL(fileName: string) {
-    return this.storage.ref('avatars' + fileName).getDownloadURL();
+    return this.storage.ref('avatars/' + fileName).getDownloadURL();
   }
 
   /**
