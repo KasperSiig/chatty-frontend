@@ -4,6 +4,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { first, flatMap, map, mapTo } from 'rxjs/operators';
 import { Avatar } from '../models/Avatar';
+import { User } from '../models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +30,9 @@ export class UserService {
 
   getAvatarDownloadURL(fileName: string) {
     return this.storage.ref('avatars' + fileName).getDownloadURL();
+  }
+
+  getUser(): User {
+    return JSON.parse(localStorage.getItem('user'));
   }
 }
