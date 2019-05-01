@@ -17,8 +17,10 @@ describe('LoginComponent', () => {
   let helper: Helper;
   let dm: DOMHelper<LoginComponent>;
   beforeEach(async(() => {
-    userServiceMock = jasmine.createSpyObj('UserService', ['login']);
+    userServiceMock = jasmine.createSpyObj('UserService', ['login', 'getAllAvatarsNames', 'getAvatarDownloadURL']);
     userServiceMock.login.and.returnValue(of([]));
+    userServiceMock.getAllAvatarsNames.and.returnValue(of([]));
+    userServiceMock.getAvatarDownloadURL.and.returnValue(of([]));
     TestBed.configureTestingModule({
       declarations: [ LoginComponent ],
       imports: [
