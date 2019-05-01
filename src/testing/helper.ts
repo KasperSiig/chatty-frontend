@@ -3,6 +3,7 @@ import { User } from '../app/shared/models/User';
 
 export class Helper {
   messages: Message[] = [];
+  users: User[] = [];
 
   /**
    * Creates an array of messages for testing.
@@ -15,5 +16,14 @@ export class Helper {
       );
     }
     return this.messages;
+  }
+
+  getUsers(amount: number) {
+    for (let i = 0; i < amount; i++) {
+      this.users.push(
+        {userName: 'Test name', avatarUrl: 'www.test.dk'}
+      );
+    }
+    return this.users;
   }
 }

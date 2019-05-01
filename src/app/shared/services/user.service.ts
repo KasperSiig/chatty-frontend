@@ -28,11 +28,23 @@ export class UserService {
       );
   }
 
+  /**
+   * Gets download url for avatar
+   * @param fileName Name of avatar file
+   */
   getAvatarDownloadURL(fileName: string) {
-    return this.storage.ref('avatars' + fileName).getDownloadURL();
+    return this.storage.ref('avatars/' + fileName).getDownloadURL();
   }
 
   /**
+   * Saves username in localStorage
+   * @param username String to save in localStorage
+   */
+  login(user: User) {
+    localStorage.setItem('user', JSON.stringify(user));
+  }
+  
+   /**
    * Gets the user currently logged in
    */
   getUser(): User {

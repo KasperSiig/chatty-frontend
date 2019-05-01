@@ -9,39 +9,24 @@
       fxLayout="column">
       <mat-form-field
         class="nameInput">
-        <input
-          type="text"
-          matInput
-          class="nameInput"
-          placeholder="Enter Name...">
+        <input #username
+               type="text"
+               matInput
+               class="nameInput"
+               placeholder="Enter Name...">
       </mat-form-field>
       <div
         class="avatars"
         fxLayout="row wrap">
+        <!--
+        Runs foreach loop on imgUrls array and gets index on each.
+        Binds index to selected variable and uses selected variable to determines which image is selected.
+        -->
         <img
-          src="https://firebasestorage.googleapis.com/v0/b/chatty-238611.appspot.com/o/avatars%2Favatar1.png?alt=media&token=9b6fd2a8-4b1f-45d0-88c7-00b50cf1eebb"
-          alt="">
-        <img
-          src="https://firebasestorage.googleapis.com/v0/b/chatty-238611.appspot.com/o/avatars%2Favatar2.png?alt=media&token=35e64ed2-1a48-4db3-8497-de7ec312b70a"
-          alt="">
-        <img
-          src="https://firebasestorage.googleapis.com/v0/b/chatty-238611.appspot.com/o/avatars%2Favatar3.png?alt=media&token=b508b123-c558-43ba-829c-519ebb803e5f"
-          alt="">
-        <img
-          src="https://firebasestorage.googleapis.com/v0/b/chatty-238611.appspot.com/o/avatars%2Favatar4.png?alt=media&token=fb6ddfde-ef77-48ab-85f5-6895f58bfa67"
-          alt="">
-        <img
-          src="https://firebasestorage.googleapis.com/v0/b/chatty-238611.appspot.com/o/avatars%2Favatar4.png?alt=media&token=fb6ddfde-ef77-48ab-85f5-6895f58bfa67"
-          alt="">
-        <img
-          src="https://firebasestorage.googleapis.com/v0/b/chatty-238611.appspot.com/o/avatars%2Favatar6.png?alt=media&token=579c9583-a011-42ca-a376-ba0d4a63fe21"
-          alt="">
-        <img
-          src="https://firebasestorage.googleapis.com/v0/b/chatty-238611.appspot.com/o/avatars%2Favatar7.png?alt=media&token=f930bea6-5561-493d-b432-106a149680fc"
-          alt="">
-        <img
-          src="https://firebasestorage.googleapis.com/v0/b/chatty-238611.appspot.com/o/avatars%2Favatar8.png?alt=media&token=fa24ae9e-aaea-4941-b126-15890f874261"
-          alt="">
+          *ngFor="let imgUrl of imgUrls"
+          (click)="selected = imgUrls.indexOf(imgUrl)"
+          [ngClass]="selected === imgUrls.indexOf(imgUrl) ? 'selected' : 'unselected'"
+          src="{{imgUrl}}">
       </div>
       <div
         class="login"
@@ -49,7 +34,9 @@
         <button
           mat-raised-button
           color="primary"
-          class="loginBtn">LOGIN</button>
+          class="loginBtn"
+          (click)="onSubmit(username.value)">LOGIN
+        </button>
       </div>
     </form>
   </div>

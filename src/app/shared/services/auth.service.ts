@@ -11,6 +11,6 @@ export class AuthService {
    * Checks if user is logged in
    */
   isLoggedIn(): boolean {
-    return !!JSON.parse(localStorage.getItem('username'));
+    return !!JSON.parse(localStorage.getItem('user'));
   }
 }

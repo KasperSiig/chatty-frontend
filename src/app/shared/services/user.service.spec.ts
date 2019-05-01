@@ -80,6 +80,15 @@ describe('UserService', () => {
   });
 
   describe('User', () => {
+    it('should be logged in', () => {
+      const userMock = {
+        userName: 'username',
+        avatarUrl: 'https://example.com/avatar1.png'
+      };
+      service.login(userMock);
+      expect(localStorageMock.getItem('user')).toBe(JSON.stringify(userMock));
+    });
+  
     it('should get logged in user', () => {
       localStorageMock.setItem('user', JSON.stringify(userMock));
       const user = service.getUser();

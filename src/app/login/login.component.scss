@@ -10,9 +10,10 @@
   width: 54%;
 }
 
-.avatars img {
+.unselected {
   border: 1px solid black;
   margin: 5px;
+  border-radius: 1000px;
 }
 
 // Login
@@ -23,4 +24,10 @@
 
 .login {
   width: 100%;
+}
+
+.selected {
+  border: 5px solid #008dd7;
+  margin: 5px;
+  border-radius: 1000px;
 }
