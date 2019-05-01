@@ -5,18 +5,27 @@ import { of } from 'rxjs';
 import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/firestore';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { environment } from '../../../environments/environment';
+import { User } from '../models/User';
+import { UserService } from './user.service';
 
 describe('MessageService', () => {
   let fsCollectionMock: any;
   let angularFirestoreMock: any;
   let service: MessageService;
   let httpMock: HttpTestingController;
+  let userSvcMock: any;
 
   beforeEach(() => {
+    // Mock AngularFirestore
     angularFirestoreMock = jasmine.createSpyObj('AngularFirestore', ['collection']);
     fsCollectionMock = jasmine.createSpyObj('collection', ['valueChanges']);
     angularFirestoreMock.collection.and.returnValue(fsCollectionMock);
     fsCollectionMock.valueChanges.and.returnValue(of([]));
+
+    // Mock UserService
+    userSvcMock = jasmine.createSpyObj('UserService', ['getUser']);
+    userSvcMock.getUser.and.returnValue(new User());
+
     TestBed.configureTestingModule({
 
       imports: [
@@ -25,7 +34,8 @@ describe('MessageService', () => {
         HttpClientTestingModule,
       ],
       providers: [
-        {provide: AngularFirestore, useValue: angularFirestoreMock}
+        {provide: AngularFirestore, useValue: angularFirestoreMock},
+        {provide: UserService, useValue: userSvcMock}
       ]
     });
     httpMock = getTestBed().get(HttpTestingController);
@@ -46,11 +56,7 @@ describe('MessageService', () => {
   });
 
   it('Returned Observable should match data', () => {
-    const mockMessage = {
-      content: 'Test message',
-      sender: 'Test Person',
-      time: 4567890
-    };
+    const mockMessage = 'message';
 
     service.send(mockMessage).subscribe();
     const req = httpMock.expectOne(environment.apiUrl + '/message');
