@@ -32,6 +32,9 @@ export class UserService {
     return this.storage.ref('avatars' + fileName).getDownloadURL();
   }
 
+  /**
+   * Gets the user currently logged in
+   */
   getUser(): User {
     return JSON.parse(localStorage.getItem('user'));
   }
