@@ -1,5 +1,6 @@
 import { ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { DebugElement } from "@angular/core";
 
 export class DOMHelper<T> {
   private fixture: ComponentFixture<T>;
@@ -12,10 +13,10 @@ export class DOMHelper<T> {
    * Gets the text defined by the parameter
    * @param tagName
    */
-  singleText(tagName: string): string {
-    const h2Element = this.fixture.debugElement.query(By.css(tagName));
-    if (h2Element) {
-      return h2Element.nativeElement.textContent;
+  getElement(tagName: string): HTMLElement {
+    const element = this.fixture.debugElement.query(By.css(tagName));
+    if (element) {
+      return element.nativeElement;
     }
   }
 
