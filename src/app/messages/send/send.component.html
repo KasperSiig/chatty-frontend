@@ -2,11 +2,13 @@
   class="container"
   fxLayout="row"
   fxLayoutAlign="center center">
-  <mat-form-field class="inputChat"
-                  appearance="standard">
-    <mat-label>Message To Send</mat-label>
-    <input matInput placeholder="">
-  </mat-form-field>
-  <span class="spacer"></span>
-  <button class="msgBtn">Send Message</button>
+  <form [formGroup]="messageForm">
+    <mat-form-field class="inputChat"
+                    appearance="standard">
+      <mat-label>Message To Send</mat-label>
+      <input matInput placeholder="" formControlName="message" (keyup)="isMessage()">
+    </mat-form-field>
+    <span class="spacer"></span>
+    <button [disabled]="isDisabled" class="msgBtn" (click)="send()">Send Message</button>
+  </form>
 </div>
