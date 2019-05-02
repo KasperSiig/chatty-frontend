@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../shared/models/User';
 import { UserService } from '../shared/services/user.service';
 import { forEach } from "@angular/router/src/utils/collection";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,8 @@ export class LoginComponent implements OnInit {
 
   imgUrls = [];
 
-  constructor(private us: UserService) {
+  constructor(private us: UserService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -36,5 +38,6 @@ export class LoginComponent implements OnInit {
     user.userName = username;
     user.avatarUrl = this.imgUrls[this.selected];
     this.us.login(user);
+    this.router.navigate(['/']);
   }
 }
