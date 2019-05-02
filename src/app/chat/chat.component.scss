@@ -1,15 +1,16 @@
-//Layout
+// Layout
 .container {
   margin: 50px 50px;
 }
 
-//Send Component position
+// Send Component position
 .send {
   position: absolute;
   width: 93%;
   bottom: 10px;
 }
 
+// Message Component position
 .messages {
   height: 70vh;
   overflow-y: scroll;
