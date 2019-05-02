@@ -8,6 +8,10 @@ import { of } from 'rxjs';
 import { UserService } from '../shared/services/user.service';
 import { Helper } from '../../testing/helper';
 import { DOMHelper } from '../../testing/dom-helper';
+import {Router} from '@angular/router';
+import {Component} from '@angular/core';
+import {RouterTestingModule} from '@angular/router/testing';
+import {LoggedInGuard} from '../shared/guards/logged-in.guard';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -16,21 +20,32 @@ describe('LoginComponent', () => {
   let userServiceMock: any;
   let helper: Helper;
   let dm: DOMHelper<LoginComponent>;
+  let routerMock;
   beforeEach(async(() => {
     userServiceMock = jasmine.createSpyObj('UserService', ['login', 'getAllAvatarsNames', 'getAvatarDownloadURL']);
     userServiceMock.login.and.returnValue(of([]));
     userServiceMock.getAllAvatarsNames.and.returnValue(of([]));
     userServiceMock.getAvatarDownloadURL.and.returnValue(of([]));
+    routerMock = jasmine.createSpyObj('Router', ['navigate']);
+    routerMock.navigate.and.returnValue('');
     TestBed.configureTestingModule({
-      declarations: [ LoginComponent ],
+      declarations: [
+        LoginComponent,
+        DummyComponent
+      ],
       imports: [
         MatFormFieldModule,
         FlexLayoutModule,
         MatInputModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        RouterTestingModule.withRoutes([
+            {path: '', component: DummyComponent, canActivate: [LoggedInGuard]},
+            {path: 'login', component: DummyComponent}
+        ])
       ],
       providers: [
-        {provide: UserService, useValue: userServiceMock}
+        {provide: UserService, useValue: userServiceMock},
+        {provide: Router, useValue: routerMock}
       ]
     })
     .compileComponents();
@@ -54,4 +69,10 @@ describe('LoginComponent', () => {
     expect(userServiceMock.login).toHaveBeenCalledTimes(1);
   });
 });
+
+@Component({
+  template: ''
+})
+class DummyComponent {
+}
 

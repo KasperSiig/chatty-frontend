@@ -9,7 +9,7 @@
       <span fxLayout="column" fxFlex="auto" class="msgData" fxLayoutGap="10px">
         <span fxLayout="row" fxLayoutAlign="space-between">
           <span class="username">{{ message?.sender?.userName }}</span>
-          <span class="date">{{ message?.time | date}}</span>
+          <span class="date">{{ message?.time | date:'medium'}}</span>
         </span>
         <span class="message">
           {{ message?.content }}
