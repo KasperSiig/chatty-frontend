@@ -3,19 +3,21 @@
     class="container"
     fxLayout="row"
     fxLayoutAlign="space-between">
-    <img
+    <a href="#"><img
       fxLayoutAlign="center center"
       class="imgLogo"
       src="assets/imgs/Chattylogo.png"
-      alt="ChattyLogo">
+      alt="ChattyLogo"
+      routerLink="/"></a>
     <div
       fxLayout="row"
       fxLayoutAlign="end center">
       <img
         fxLayoutAlign="center center"
         class="avatarLogo"
-        src="assets/imgs/Chattylogo.png"
-        alt="AvatarLogo">
+        src="{{ avatarUrl }}"
+        alt="AvatarLogo"
+        *ngIf="avatarUrl">
     </div>
   </mat-toolbar>
 </div>

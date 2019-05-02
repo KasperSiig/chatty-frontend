@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { first, flatMap, map, mapTo } from 'rxjs/operators';
@@ -10,6 +10,8 @@ import { User } from '../models/User';
   providedIn: 'root'
 })
 export class UserService {
+
+  public user = new BehaviorSubject<User>(this.getUser());
 
   constructor(private storage: AngularFireStorage,
               private db: AngularFirestore) {
@@ -42,12 +44,20 @@ export class UserService {
    */
   login(user: User) {
     localStorage.setItem('user', JSON.stringify(user));
+    this.user.next(this.getUser());
   }
-  
+
    /**
-   * Gets the user currently logged in
-   */
+    * Gets the user currently logged in
+    */
   getUser(): User {
-    return JSON.parse(localStorage.getItem('user'));
+     return JSON.parse(localStorage.getItem('user'));
+  }
+
+  /**
+   * Gets the user in form of an observable
+   */
+  getUserObs(): Observable<User> {
+    return this.user;
   }
 }

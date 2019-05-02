@@ -4,6 +4,10 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { MatToolbarModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -11,7 +15,10 @@ describe('AppComponent', () => {
       imports: [
         RouterTestingModule,
         MatToolbarModule,
-        FlexLayoutModule
+        FlexLayoutModule,
+        AngularFireStorageModule,
+        AngularFirestoreModule,
+        AngularFireModule.initializeApp(environment.config)
       ],
       declarations: [
         AppComponent,
