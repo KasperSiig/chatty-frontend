@@ -3,19 +3,39 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HeaderComponent } from './header.component';
 import {  MatToolbarModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { environment } from '../../../environments/environment';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { User } from '../models/User';
+import { UserService } from '../services/user.service';
+import { BehaviorSubject, of } from 'rxjs';
 
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
 
+  let userSvcMock: any;
+
   beforeEach(async(() => {
+    userSvcMock = jasmine.createSpyObj('UserService', ['getUserObs']);
+    userSvcMock.getUserObs.and.returnValue(of(new User()));
+
     TestBed.configureTestingModule({
       imports: [
         MatToolbarModule,
-        FlexLayoutModule
+        FlexLayoutModule,
+        AngularFireStorageModule,
+        AngularFirestoreModule,
+        AngularFireModule.initializeApp(environment.config)
       ],
-      declarations: [ HeaderComponent ]
+      declarations: [
+        HeaderComponent
+      ],
+      providers: [
+        { provide: UserService, useValue: userSvcMock }
+      ]
     })
     .compileComponents();
   }));

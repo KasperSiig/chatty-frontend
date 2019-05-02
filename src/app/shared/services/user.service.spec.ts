@@ -5,7 +5,7 @@ import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/firestor
 import { AngularFireStorage, AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../../../environments/environment';
-import { of } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
 import { User } from '../models/User';
 
 describe('UserService', () => {
@@ -30,7 +30,7 @@ describe('UserService', () => {
     angularFireStorageMock.ref.and.returnValue(refMock);
     refMock.getDownloadURL.and.returnValue(of('https://example.com/avatar1.png'));
 
-    store = { username: 'username'};
+    store = {};
     localStorageMock = {
       getItem: (key: string): string => {
         return store[key];
@@ -46,6 +46,7 @@ describe('UserService', () => {
     userMock = new User();
     userMock.userName = 'username';
     userMock.avatarUrl = 'https://example.com/avatar1.png';
+    localStorageMock.setItem('user', JSON.stringify(userMock));
 
     TestBed.configureTestingModule({
       imports: [
@@ -88,12 +89,17 @@ describe('UserService', () => {
       service.login(userMock);
       expect(localStorageMock.getItem('user')).toBe(JSON.stringify(userMock));
     });
-  
+
     it('should get logged in user', () => {
       localStorageMock.setItem('user', JSON.stringify(userMock));
       const user = service.getUser();
       expect(user.avatarUrl).toBe(userMock.avatarUrl);
       expect(user.userName).toBe(userMock.userName);
+    });
+
+    it('should return as observable', () => {
+      service.user = new BehaviorSubject<User>(new User());
+      expect(service.getUserObs()).toBeTruthy();
     });
   });
 });

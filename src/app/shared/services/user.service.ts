@@ -48,9 +48,16 @@ export class UserService {
   }
 
    /**
-   * Gets the user currently logged in
-   */
+    * Gets the user currently logged in
+    */
   getUser(): User {
-    return JSON.parse(localStorage.getItem('user'));
+     return JSON.parse(localStorage.getItem('user'));
+  }
+
+  /**
+   * Gets the user in form of an observable
+   */
+  getUserObs(): Observable<User> {
+    return this.user;
   }
 }
