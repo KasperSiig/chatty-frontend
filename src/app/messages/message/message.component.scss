@@ -1,0 +1,28 @@
+// Container Style
+.container {
+  height:70vh;
+  border: 1px dotted grey;
+}
+
+// Message Content
+.date, .username{
+  color: #35B7AE;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.message {
+  color: black;
+  font-size: 12px;
+}
+
+.msgData {
+  margin-left: 15px;
+}
+
+// Image User Avatar
+.imgUserPic {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+}

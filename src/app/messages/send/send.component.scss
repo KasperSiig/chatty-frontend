@@ -1,6 +1,6 @@
 //Container for the Textfield and Button
 .container {
-  width: 100%
+  width: 99.25%
 }
 
 .spacer {
@@ -19,12 +19,14 @@
 }
 
 //Send Button - not hovered
-.msgSend {
+.msgBtn {
   color: white;
   font-size: 16px;
   font-family: 'Raleway', sans-serif;
   background: #35B7AE;
-  width: 10%
+  width: 15%;
+  height: 40px;
+  border-radius: 10px;
 }
 
 //Colors for the Textfield - not focused
