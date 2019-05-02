@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MessageService } from '../shared/services/message.service';
 import { Message } from '../shared/models/Message';
 import { Subscription } from 'rxjs';
@@ -8,7 +8,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
-export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
+export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   @ViewChild('chat') chat: ElementRef;
 
@@ -18,22 +18,26 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(private ms: MessageService) {
   }
 
-  /**
-   * Receives all messages
-   */
   ngOnInit() {
     this.subscription = this.ms.recieve().subscribe(messages => {
       this.messages = messages;
     });
   }
 
-  ngAfterViewInit() {
-    const ref = this.chat.nativeElement as HTMLElement;
-    ref.scrollTop = ref.scrollHeight;
-  }
-
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
+
+  /**
+   * Scrolls messageview to bottom
+   */
+  scrollToBottom() {
+    const ref = this.chat.nativeElement as HTMLElement;
+    ref.scrollTop = ref.scrollHeight;
   }
 
 }
