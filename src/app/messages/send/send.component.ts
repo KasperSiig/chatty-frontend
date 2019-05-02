@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MessageService } from '../../shared/services/message.service';
 import { FormControl, FormGroup } from '@angular/forms';
 
@@ -15,6 +15,8 @@ export class SendComponent implements OnInit {
 
   isDisabled = true;
 
+  @ViewChild('input') input: ElementRef;
+
   constructor(private messageService: MessageService) {
   }
 
@@ -27,17 +29,18 @@ export class SendComponent implements OnInit {
    */
   send() {
     this.messageService.send(this.messageForm.get('message').value).subscribe();
+    this.input.nativeElement.value = '';
+    this.isMessage();
   }
 
   /**
    * Checks if input field has a value
    */
   isMessage() {
-    if (this.messageForm.get('message').value == null || this.messageForm.get('message').value === '') {
-      this.isDisabled = true;
-    } else {
-      this.isDisabled = false;
-    }
+    this.isDisabled =
+      this.messageForm.get('message').value == null ||
+      this.messageForm.get('message').value === '' ||
+      this.input.nativeElement.value === '';
   }
 
 }

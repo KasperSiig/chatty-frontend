@@ -1,12 +1,13 @@
-<div
-  class="container"
-  fxLayout="row"
-  fxLayoutAlign="center center">
-  <form [formGroup]="messageForm">
+<div class="container">
+  <form
+    [formGroup]="messageForm"
+    fxFill="100"
+    fxLayout="row"
+    fxLayoutAlign="center center">
     <mat-form-field class="inputChat"
                     appearance="standard">
       <mat-label>Message To Send</mat-label>
-      <input matInput placeholder="" formControlName="message" (keyup)="isMessage()">
+      <input matInput placeholder="" formControlName="message" (keyup)="isMessage()" #input>
     </mat-form-field>
     <span class="spacer"></span>
     <button [disabled]="isDisabled" class="msgBtn" (click)="send()">Send Message</button>
