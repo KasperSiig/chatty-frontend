@@ -4,15 +4,15 @@
       <img fxLayout="column"
            fxLayoutAlign="center center"
            class="imgUserPic"
-           src="assets/imgs/Chattylogo.png"
+           src="{{ message?.sender?.avatarUrl }}"
            alt="UserLogo">
       <span fxLayout="column" fxFlex="auto" class="msgData" fxLayoutGap="10px">
         <span fxLayout="row" fxLayoutAlign="space-between">
-          <span class="username">Username</span>
-          <span class="date">Dato</span>
+          <span class="username">{{ message?.sender?.userName }}</span>
+          <span class="date">{{ message?.time | date}}</span>
         </span>
         <span class="message">
-          Besked
+          {{ message?.content }}
         </span>
       </span>
     </mat-card-content>

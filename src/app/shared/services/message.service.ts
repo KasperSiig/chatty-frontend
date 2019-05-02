@@ -35,7 +35,7 @@ export class MessageService {
     return this.db.collection<Message>('messages').valueChanges().pipe(
       map(messages => {
         return messages.sort((messagea, messageb) => {
-          return messageb.time - messagea.time;
+          return messagea.time - messageb.time;
         });
       })
     );
