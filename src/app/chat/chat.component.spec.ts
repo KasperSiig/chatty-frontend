@@ -10,6 +10,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 import { SendComponent } from '../messages/send/send.component';
 import { MessageComponent } from '../messages/message/message.component';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 describe('ChatComponent', () => {
   let component: ChatComponent;
@@ -33,7 +34,9 @@ describe('ChatComponent', () => {
         MatInputModule,
         MatFormFieldModule,
         HttpClientModule,
-        MatCardModule
+        MatCardModule,
+        ReactiveFormsModule,
+        FormsModule
       ],
       declarations: [
         ChatComponent,

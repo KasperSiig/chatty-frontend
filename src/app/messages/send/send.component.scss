@@ -18,6 +18,10 @@
   background: #7F95D1;
 }
 
+.msgBtn:disabled {
+  background: darkgray;
+}
+
 //Send Button - not hovered
 .msgBtn {
   color: white;

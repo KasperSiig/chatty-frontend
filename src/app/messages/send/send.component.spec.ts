@@ -8,6 +8,7 @@ import { MessageService } from '../../shared/services/message.service';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule, MatFormFieldModule, MatInputModule, } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 describe('SendComponent', () => {
   let component: SendComponent;
@@ -30,7 +31,9 @@ describe('SendComponent', () => {
         MatButtonModule,
         MatInputModule,
         MatFormFieldModule,
-        HttpClientModule
+        HttpClientModule,
+        ReactiveFormsModule,
+        FormsModule
       ],
       declarations: [
         SendComponent
@@ -52,9 +55,24 @@ describe('SendComponent', () => {
   });
 
   it('should call send in component one time', () => {
-    component.send('test message');
+    component.messageForm.get('message').setValue('test')
+    component.send();
     fixture.detectChanges();
     expect(messageServiceMock.send).toHaveBeenCalledTimes(1);
+  });
+
+  it('isDisabled should be false if input contains value', () => {
+    component.messageForm.get('message').setValue('test');
+    component.isMessage();
+    fixture.detectChanges();
+    expect(component.isDisabled).toBeFalsy();
+  });
+
+  it('isDisabled should be true if input doesnt contains value', () => {
+    component.messageForm.get('message');
+    component.isMessage();
+    fixture.detectChanges();
+    expect(component.isDisabled).toBeTruthy();
   });
 
 });
