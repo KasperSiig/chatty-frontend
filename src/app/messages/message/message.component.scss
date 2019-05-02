@@ -1,0 +1,25 @@
+.messageCard {
+  background-color: lightgray;
+  padding: 10px;
+}
+
+.date, .username{
+  color: #35B7AE;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.message {
+  color: black;
+  font-size: 12px;
+}
+
+.imgUserPic {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+}
+
+.msgData {
+  margin-left: 15px;
+}

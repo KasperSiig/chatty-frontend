@@ -9,3 +9,9 @@
   width: 93%;
   bottom: 10px;
 }
+
+.messages {
+  height: 70vh;
+  overflow-y: scroll;
+  box-shadow: 0 4px 2px -2px gray;
+}

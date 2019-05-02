@@ -7,7 +7,7 @@ import { MessageService } from '../shared/services/message.service';
 import { of } from 'rxjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatButtonModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 import { SendComponent } from '../messages/send/send.component';
 import { MessageComponent } from '../messages/message/message.component';
 
@@ -32,7 +32,8 @@ describe('ChatComponent', () => {
         MatButtonModule,
         MatInputModule,
         MatFormFieldModule,
-        HttpClientModule
+        HttpClientModule,
+        MatCardModule
       ],
       declarations: [
         ChatComponent,
