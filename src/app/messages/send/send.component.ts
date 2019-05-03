@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MessageService } from '../../shared/services/message.service';
 import { FormControl, FormGroup } from '@angular/forms';
+import {FileService} from '../../shared/services/file.service';
 
 @Component({
   selector: 'app-send',
