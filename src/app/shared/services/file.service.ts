@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {UserService} from './user.service';
 import {Observable} from 'rxjs';
-import {environment} from '../../../environments/environment.prod';
+import {environment} from '../../../environments/environment';
 import {FileDTO} from '../models/dto/FileDTO';
 
 @Injectable({
@@ -10,27 +10,26 @@ import {FileDTO} from '../models/dto/FileDTO';
 })
 export class FileService {
 
-  fileString: string;
-  fileDTO = new FileDTO();
   constructor(private us: UserService,
               private http: HttpClient) {
 
   }
 
- async uploadImage(file: File) {
-    this.fileDTO.size = file.size;
-    this.fileDTO.type = file.type;
-    this.fileDTO.user = this.us.getUser();
-    const reader = new FileReader();
-    reader.onload = await this.handleReaderLoaded.bind(this);
-    reader.readAsBinaryString(file);
-    console.log(this.fileString);
+  async uploadImage(file: File) {
+    const fileDTO = new FileDTO();
+    fileDTO.size = file.size;
+    fileDTO.type = file.type;
+    fileDTO.user = this.us.getUser();
+    fileDTO.base64File = await this.getBase64(file);
+    this.http.post<any>(environment.apiUrl + '/files', fileDTO).subscribe();
   }
 
-  handleReaderLoaded(readerEvt) {
-    const binaryString = readerEvt.target.result;
-    this.fileString = btoa(binaryString);
-    this.fileDTO.base64File = this.fileString;
-    this.http.post<any>(environment.apiUrl + '/files', this.fileDTO).subscribe();
+  getBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
+    });
   }
 }
