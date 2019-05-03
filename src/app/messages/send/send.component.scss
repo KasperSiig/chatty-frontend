@@ -3,8 +3,9 @@
   width: 99.25%
 }
 
+//Creates space between objects
 .spacer {
-  margin: 25px;
+  margin: 10px;
 }
 
 //Textfield focued or not focused
@@ -66,4 +67,17 @@
   .mat-input-element {
     color: #7F95D1;
   }
+}
+
+.material-icons {
+  color: white;
+  width: 40px;
+  height: 40px;
+  background: #35B7AE;
+  border-radius: 100%;
+}
+
+//Hides "Choose file" button and "What file/No has been chosen"
+.none {
+  display: none !important;
 }
