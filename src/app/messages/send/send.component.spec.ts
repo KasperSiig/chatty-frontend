@@ -9,6 +9,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule, MatFormFieldModule, MatInputModule, } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import {AngularFirestoreModule} from '@angular/fire/firestore';
+import {AngularFireStorageModule} from '@angular/fire/storage';
+import {AngularFireModule} from '@angular/fire';
+import {environment} from '../../../environments/environment';
 
 describe('SendComponent', () => {
   let component: SendComponent;
@@ -33,7 +37,10 @@ describe('SendComponent', () => {
         MatFormFieldModule,
         HttpClientModule,
         ReactiveFormsModule,
-        FormsModule
+        FormsModule,
+        AngularFirestoreModule,
+        AngularFireStorageModule,
+        AngularFireModule.initializeApp(environment.config)
       ],
       declarations: [
         SendComponent

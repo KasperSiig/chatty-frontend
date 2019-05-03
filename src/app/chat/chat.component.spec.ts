@@ -11,6 +11,10 @@ import { MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule } fr
 import { SendComponent } from '../messages/send/send.component';
 import { MessageComponent } from '../messages/message/message.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import {AngularFirestoreModule} from '@angular/fire/firestore';
+import {AngularFireStorageModule} from '@angular/fire/storage';
+import {AngularFireModule} from '@angular/fire';
+import {environment} from '../../environments/environment';
 
 describe('ChatComponent', () => {
   let component: ChatComponent;
@@ -36,7 +40,10 @@ describe('ChatComponent', () => {
         HttpClientModule,
         MatCardModule,
         ReactiveFormsModule,
-        FormsModule
+        FormsModule,
+        AngularFirestoreModule,
+        AngularFireStorageModule,
+        AngularFireModule.initializeApp(environment.config)
       ],
       declarations: [
         ChatComponent,
