@@ -17,7 +17,8 @@ export class SendComponent implements OnInit {
 
   @ViewChild('input') input: ElementRef;
 
-  constructor(private messageService: MessageService) {
+  constructor(private messageService: MessageService,
+              private fs: FileService) {
   }
 
   ngOnInit() {
@@ -42,5 +43,11 @@ export class SendComponent implements OnInit {
       this.messageForm.get('message').value === '' ||
       this.input.nativeElement.value === '';
   }
+
+  uploadFile(event) {
+    const file = event.target.files[0];
+    return this.fs.uploadImage(file).subscribe();
+  }
+
 
 }
