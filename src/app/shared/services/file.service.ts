@@ -20,7 +20,8 @@ export class FileService {
     fileDTO.size = file.size;
     fileDTO.type = file.type;
     fileDTO.user = this.us.getUser();
-    fileDTO.base64File = await this.getBase64(file);
+    fileDTO.base64File = await this.getBase64(file) as string;
+    console.log(fileDTO.base64File);
     this.http.post<any>(environment.apiUrl + '/files', fileDTO).subscribe();
   }
 
