@@ -11,5 +11,16 @@
     </mat-form-field>
     <span class="spacer"></span>
     <button [disabled]="isDisabled" class="msgBtn" (click)="send()">Send Message</button>
+
+    <span class="spacer"></span>
+      <div class="file_input">
+        <label class="mat-icon-button"
+               fxLayoutAlign="center center">
+          <i class="material-icons"
+          fxLayoutAlign="center center">cloud_upload</i>
+          <input id="file_input_file" class="none" type="file" />
+        </label>
+      </div>
+
   </form>
 </div>
