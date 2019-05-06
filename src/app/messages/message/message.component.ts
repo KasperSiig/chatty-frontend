@@ -9,7 +9,7 @@ import { Message } from '../../shared/models/Message';
 export class MessageComponent implements OnInit {
 
   // Contains info about the message
-  @Input() message: Message;
+  @Input() message = new Message();
 
   constructor() {
   }

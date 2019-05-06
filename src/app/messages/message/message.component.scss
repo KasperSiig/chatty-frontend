@@ -5,11 +5,13 @@
   font-size: 14px;
 }
 
+//The message
 .message {
   color: black;
   font-size: 12px;
 }
 
+//Data in a message
 .msgData {
   margin-left: 15px;
 }
@@ -19,4 +21,14 @@
   width: 40px;
   height: 40px;
   border-radius: 100%;
+}
+
+//Unclicked picture - Size
+.imgSmall {
+  height: 25px;
+}
+
+//Clicked picture - Size
+.imgBig {
+  height: 250px;
 }

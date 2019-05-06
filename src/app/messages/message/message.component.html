@@ -12,10 +12,17 @@
           <span class="date">{{ message?.time | date:'medium'}}</span>
         </span>
         <span class="message">
-          {{ message?.content }}
+        <img *ngIf="message.isFile"
+             class="imgSmall"
+             (click)="isDisabled = !isDisabled"
+             [ngClass]="isDisabled ? 'imgBig' : 'imgSmall'"
+             src="{{ message?.content }}"
+             alt="{{ message?.content }}"/>
+              <span *ngIf="!message.isFile">
+                {{ message?.content }}
+              </span>
         </span>
       </span>
     </mat-card-content>
   </mat-card>
 </div>
-
