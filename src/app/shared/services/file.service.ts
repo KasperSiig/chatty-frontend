@@ -15,6 +15,11 @@ export class FileService {
 
   }
 
+
+  /**
+   * Posts file to angular
+   * @param file to be uploaded
+   */
   async uploadImage(file: File) {
     const fileDTO = new FileDTO();
     fileDTO.size = file.size;
@@ -24,6 +29,10 @@ export class FileService {
     this.http.post<any>(environment.apiUrl + '/files', fileDTO).subscribe();
   }
 
+  /**
+   * Creates file reader and reads file
+   * @param file chosen from file chooser
+   */
   getBase64(file) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();

@@ -45,6 +45,10 @@ export class SendComponent implements OnInit {
       this.input.nativeElement.value === '';
   }
 
+  /**
+   * Calls uploadImage from FileService
+   * @param event is the event of file chooser
+   */
   uploadFile(event) {
     const file = event.target.files[0];
     return this.fs.uploadImage(file);
