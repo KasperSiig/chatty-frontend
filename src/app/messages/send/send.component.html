@@ -18,7 +18,7 @@
                fxLayoutAlign="center center">
           <i class="material-icons"
           fxLayoutAlign="center center">cloud_upload</i>
-          <input id="file_input_file" class="none" type="file" />
+          <input id="file_input_file" class="none" type="file" (change)="uploadFile($event)" />
         </label>
       </div>
 
