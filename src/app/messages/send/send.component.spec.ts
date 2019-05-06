@@ -8,11 +8,12 @@ import { MessageService } from '../../shared/services/message.service';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule, MatFormFieldModule, MatInputModule, } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {AngularFireStorageModule} from '@angular/fire/storage';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../../../environments/environment';
+import { FileService } from "../../shared/services/file.service";
 
 describe('SendComponent', () => {
   let component: SendComponent;
@@ -21,13 +22,17 @@ describe('SendComponent', () => {
   let dm: DOMHelper<SendComponent>;
   let helper: Helper;
   let messageServiceMock: any;
+  let fileServiceMock: any;
 
   beforeEach(async(() => {
+    fileServiceMock = jasmine.createSpyObj('FileService', ['uploadImage']);
+    fileServiceMock.uploadImage.and.returnValue(of([]));
     messageServiceMock = jasmine.createSpyObj('MessageService', ['send']);
     messageServiceMock.send.and.returnValue(of([]));
     TestBed.configureTestingModule({
       providers: [
-        {provide: MessageService, useValue: messageServiceMock}
+        {provide: MessageService, useValue: messageServiceMock},
+        {provide: FileService, useValue: fileServiceMock}
       ],
       imports: [
         BrowserAnimationsModule,
@@ -80,6 +85,13 @@ describe('SendComponent', () => {
     component.isMessage();
     fixture.detectChanges();
     expect(component.isDisabled).toBeTruthy();
+  });
+
+  it('should call uploadFile one time', () => {
+    const event = {target: {files: [new File([''], 'filename')]}};
+    component.uploadFile(event);
+    fixture.detectChanges();
+    expect(fileServiceMock.uploadImage).toHaveBeenCalledTimes(1);
   });
 
 });

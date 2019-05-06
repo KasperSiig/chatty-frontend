@@ -1,14 +1,13 @@
-import {getTestBed, TestBed} from '@angular/core/testing';
+import { getTestBed, TestBed } from '@angular/core/testing';
 
 import { FileService } from './file.service';
-import {HttpClientModule} from '@angular/common/http';
-import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
-import {MessageService} from './message.service';
-import {of} from 'rxjs';
-import {AngularFirestore, AngularFirestoreModule} from '@angular/fire/firestore';
-import {AngularFireStorage, AngularFireStorageModule} from '@angular/fire/storage';
-import {AngularFireModule} from '@angular/fire';
-import {environment} from '../../../environments/environment';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { of } from 'rxjs';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorage, AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../../../environments/environment';
 
 describe('FileService', () => {
 
@@ -40,6 +39,10 @@ describe('FileService', () => {
     httpMock = getTestBed().get(HttpTestingController);
     service = TestBed.get(FileService);
   });
+
+  afterEach(() => {
+    httpMock.verify();
+  })
 
   it('should be created', () => {
     expect(service).toBeTruthy();

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {UserService} from './user.service';
-import {Observable} from 'rxjs';
-import {environment} from '../../../environments/environment';
-import {FileDTO} from '../models/dto/FileDTO';
+import { HttpClient } from '@angular/common/http';
+import { UserService } from './user.service';
+import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
+import { FileDTO } from '../models/dto/FileDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,6 @@ export class FileService {
     fileDTO.type = file.type;
     fileDTO.user = this.us.getUser();
     fileDTO.base64File = await this.getBase64(file) as string;
-    console.log(fileDTO.base64File);
     this.http.post<any>(environment.apiUrl + '/files', fileDTO).subscribe();
   }
 
