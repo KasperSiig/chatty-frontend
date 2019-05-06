@@ -9,11 +9,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule, MatFormFieldModule, MatInputModule, } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {AngularFirestoreModule} from '@angular/fire/firestore';
-import {AngularFireStorageModule} from '@angular/fire/storage';
-import {AngularFireModule} from '@angular/fire';
-import {environment} from '../../../environments/environment';
-import { FileService } from "../../shared/services/file.service";
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../../../environments/environment';
+import { FileService } from '../../shared/services/file.service';
 
 describe('SendComponent', () => {
   let component: SendComponent;
@@ -25,8 +25,11 @@ describe('SendComponent', () => {
   let fileServiceMock: any;
 
   beforeEach(async(() => {
-    fileServiceMock = jasmine.createSpyObj('FileService', ['uploadImage']);
+    fileServiceMock = jasmine.createSpyObj('FileService', ['uploadImage', 'getBase64']);
     fileServiceMock.uploadImage.and.returnValue(of([]));
+    fileServiceMock.getBase64.and.returnValue(new Promise((resolve) => {
+      resolve('');
+    }));
     messageServiceMock = jasmine.createSpyObj('MessageService', ['send']);
     messageServiceMock.send.and.returnValue(of([]));
     TestBed.configureTestingModule({
@@ -67,7 +70,7 @@ describe('SendComponent', () => {
   });
 
   it('should call send in component one time', () => {
-    component.messageForm.get('message').setValue('test')
+    component.messageForm.get('message').setValue('test');
     component.send();
     fixture.detectChanges();
     expect(messageServiceMock.send).toHaveBeenCalledTimes(1);
@@ -86,14 +89,6 @@ describe('SendComponent', () => {
     fixture.detectChanges();
     expect(component.isDisabled).toBeTruthy();
   });
-
-  it('should call uploadFile one time', () => {
-    const event = {target: {files: [new File([''], 'filename')]}};
-    component.uploadFile(event);
-    fixture.detectChanges();
-    expect(fileServiceMock.uploadImage).toHaveBeenCalledTimes(1);
-  });
-
 });
 
 

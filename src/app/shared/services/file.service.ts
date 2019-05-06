@@ -19,14 +19,15 @@ export class FileService {
   /**
    * Posts file to angular
    * @param file to be uploaded
+   * @param base64File
    */
-  async uploadImage(file: File) {
+  uploadImage(file: File, base64File: string): Observable<any> {
     const fileDTO = new FileDTO();
     fileDTO.size = file.size;
     fileDTO.type = file.type;
     fileDTO.user = this.us.getUser();
-    fileDTO.base64File = await this.getBase64(file) as string;
-    this.http.post<any>(environment.apiUrl + '/files', fileDTO).subscribe();
+    fileDTO.base64File = base64File;
+    return this.http.post<any>(environment.apiUrl + '/files', fileDTO);
   }
 
   /**

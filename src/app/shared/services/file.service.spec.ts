@@ -1,4 +1,4 @@
-import { getTestBed, TestBed } from '@angular/core/testing';
+import { fakeAsync, getTestBed, TestBed } from '@angular/core/testing';
 
 import { FileService } from './file.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -42,9 +42,18 @@ describe('FileService', () => {
 
   afterEach(() => {
     httpMock.verify();
-  })
+  });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('returned Observable should match data', fakeAsync(async () => {
+    const mockFile = new File([''], 'filename', {type: 'text/plain'});
+    const base64File = await service.getBase64(mockFile) as string;
+    service.uploadImage(mockFile, base64File).subscribe();
+    const req = httpMock.expectOne(environment.apiUrl + '/files');
+
+    expect(req.request.method).toEqual('POST');
+  }));
 });
