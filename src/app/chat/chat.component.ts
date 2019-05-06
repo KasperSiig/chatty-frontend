@@ -12,7 +12,8 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   @ViewChild('chat') chat: ElementRef;
 
-  messages: Message[];
+  messages: Message[] = [];
+  messageCount = 0;
   subscription: Subscription;
 
   constructor(private ms: MessageService) {
@@ -28,8 +29,14 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.subscription.unsubscribe();
   }
 
+  /**
+   * Makes a check if scroll should be activated
+   */
   ngAfterViewChecked() {
-    this.scrollToBottom();
+    if (this.messageCount !== this.messages.length) {
+      this.scrollToBottom();
+      this.messageCount = this.messages.length;
+    }
   }
 
   /**

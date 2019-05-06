@@ -5,4 +5,5 @@ export class Message {
   content: string;
   time: number;
   sender: User;
+  isFile?: boolean;
 }
