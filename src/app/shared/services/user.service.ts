@@ -46,9 +46,8 @@ export class UserService {
    * Saves username in localStorage
    * @param username String to save in localStorage
    */
-  login(user: User) {
-    localStorage.setItem('user', JSON.stringify(user));
-    this.user.next(this.getUser());
+  login(userDTO: UserDTO): Observable<any> {
+    return this.http.post(environment.apiUrl + '/login', userDTO);
   }
 
   /**

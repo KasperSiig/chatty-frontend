@@ -32,15 +32,28 @@ export class LoginComponent implements OnInit {
    * Gets chosen username, password and avatar and calls createUser method from UserService.
    * @param username and password the user has chosen
    */
-  onSubmit(username: string, password: string, email: string) {
+  onSubmitCreate(username: string, password: string, email: string, password2: string) {
+    if (password === password2) {
+      const userDTO = new UserDTO();
+      userDTO.username = username;
+      userDTO.email = email;
+      userDTO.password = password;
+      userDTO.avatarUrl = this.imgUrls[this.selected];
+      this.us.createUser(userDTO).subscribe(token => {
+        this.us.saveToken(token);
+      });
+      this.router.navigate(['/']);
+    } else {
+      window.alert('Password dont match');
+    }
+  }
+
+  onSubmitLogin(email: string, password: string) {
     const userDTO = new UserDTO();
-    userDTO.username = username;
     userDTO.email = email;
     userDTO.password = password;
-    userDTO.avatarUrl = this.imgUrls[this.selected];
-    this.us.createUser(userDTO).subscribe(token => {
+    this.us.login(userDTO).subscribe(token => {
       this.us.saveToken(token);
     });
-    this.router.navigate(['/']);
-  }
+}
 }

@@ -11,14 +11,14 @@
       <h1>Login here</h1>
       <mat-form-field
         class="nameInputLogin">
-        <input #username
+        <input #email
                type="text"
                matInput
                class="nameInput"
-               placeholder="Enter Name...">
+               placeholder="Enter E-mail...">
       </mat-form-field>
       <mat-form-field>
-        <input
+        <input #passwordLogin
           class="passInputLogin"
           matInput placeholder="Enter your password"
           [type]="hide ? 'text' : 'password'">
@@ -33,7 +33,7 @@
           mat-raised-button
           color="primary"
           class="loginBtn"
-          (click)="onSubmit(username.value)">LOGIN
+          (click)="onSubmitLogin(email.value, passwordLogin.value)">LOGIN
         </button>
       </div>
     </form>
@@ -78,13 +78,14 @@
       </mat-form-field>
       <mat-form-field
         class="nameInputLogin">
-        <input type="text"
+        <input #email
+               type="text"
                matInput
                class="mailInput"
                placeholder="Enter E-Mail...">
       </mat-form-field>
       <mat-form-field>
-        <input
+        <input #password
           class="passInputLogin"
           matInput placeholder="Enter a password"
           [type]="hide ? 'text' : 'password'">
@@ -93,7 +94,7 @@
         </mat-icon>
       </mat-form-field>
       <mat-form-field>
-        <input
+        <input #password2
           class="passInputLogin"
           matInput placeholder="Reenter password"
           [type]="hide ? 'text' : 'password'">
@@ -108,7 +109,7 @@
           mat-raised-button
           color="primary"
           class="createBtn"
-          (click)="onSubmit(username.value)">CREATE
+          (click)="onSubmitCreate(username.value, password.value, email.value, password2.value)">CREATE
         </button>
       </div>
     </form>
