@@ -1,41 +1,114 @@
 <div
   class="container"
-  fxLayout="column"
-  fxLayoutAlign="center">
+  fxLayout="row"
+  fxLayoutAlign="center center">
   <div
-    class="login">
+    class="login"
+    fxLayout="end center">
     <form
       fxLayoutAlign="center center"
       fxLayout="column">
+      <h1>Login here</h1>
       <mat-form-field
-        class="nameInput">
+        class="nameInputLogin">
         <input #username
                type="text"
                matInput
                class="nameInput"
                placeholder="Enter Name...">
       </mat-form-field>
-      <div
-        class="avatars"
-        fxLayout="row wrap">
-        <!--
-        Runs foreach loop on imgUrls array and gets index on each.
-        Binds index to selected variable and uses selected variable to determines which image is selected.
-        -->
-        <img
-          *ngFor="let imgUrl of imgUrls"
-          (click)="selected = imgUrls.indexOf(imgUrl)"
-          [ngClass]="selected === imgUrls.indexOf(imgUrl) ? 'selected' : 'unselected'"
-          src="{{imgUrl}}">
-      </div>
+      <mat-form-field>
+        <input
+          class="passInputLogin"
+          matInput placeholder="Enter your password"
+          [type]="hide ? 'text' : 'password'">
+        <mat-icon matSuffix (click)="hide = !hide">
+          {{hide ? 'visibility' : 'visibility_off'}}
+        </mat-icon>
+      </mat-form-field>
       <div
         class="login"
-        fxLayoutAlign="center">
+        fxLayoutAlign="center center">
         <button
           mat-raised-button
           color="primary"
           class="loginBtn"
           (click)="onSubmit(username.value)">LOGIN
+        </button>
+      </div>
+    </form>
+  </div>
+
+
+  <hr
+    fxLayoutAlign="center center"
+    width="1"
+    size="500">
+
+  <div
+    class="create"
+    fxLayoutAlign="start">
+    <form
+      fxLayoutAlign="center center"
+      fxLayout="column">
+      <h1>Create User Here</h1>
+      <a>Choose Avatar</a>
+      <div
+        class="avatars"
+        fxLayout="row wrap"
+        fxLayoutAlign="start center">
+        <!--
+        Runs foreach loop on imgUrls array and gets index on each.
+        Binds index to selected variable and uses selected variable to determines which image is selected.
+        -->
+        <img
+          class="avatar"
+          *ngFor="let imgUrl of imgUrls"
+          (click)="selected = imgUrls.indexOf(imgUrl)"
+          [ngClass]="selected === imgUrls.indexOf(imgUrl) ? 'selected' : 'unselected'"
+          src="{{imgUrl}}">
+      </div>
+      <mat-form-field
+        class="nameInputLogin">
+        <input #username
+               type="text"
+               matInput
+               class="nameInput"
+               placeholder="Enter Name...">
+      </mat-form-field>
+      <mat-form-field
+        class="nameInputLogin">
+        <input type="text"
+               matInput
+               class="mailInput"
+               placeholder="Enter E-Mail...">
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          class="passInputLogin"
+          matInput placeholder="Enter a password"
+          [type]="hide ? 'text' : 'password'">
+        <mat-icon matSuffix (click)="hide = !hide">
+          {{hide ? 'visibility' : 'visibility_off'}}
+        </mat-icon>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          class="passInputLogin"
+          matInput placeholder="Reenter password"
+          [type]="hide ? 'text' : 'password'">
+        <mat-icon matSuffix (click)="hide = !hide">
+          {{hide ? 'visibility' : 'visibility_off'}}
+        </mat-icon>
+      </mat-form-field>
+      <div
+        class="createUser"
+        fxLayoutAlign="center">
+        <button
+          mat-raised-button
+          color="primary"
+          class="createBtn"
+          (click)="onSubmit(username.value)">CREATE
         </button>
       </div>
     </form>
