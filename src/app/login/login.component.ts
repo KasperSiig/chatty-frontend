@@ -12,7 +12,7 @@ import {Router} from '@angular/router';
 export class LoginComponent implements OnInit {
 
   selected = 0;
-
+  hide = true;
   imgUrls = [];
 
   constructor(private us: UserService,
