@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LoginComponent } from './login.component';
-import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatFormFieldModule, MatIconModule, MatInputModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
@@ -37,6 +37,7 @@ describe('LoginComponent', () => {
         MatFormFieldModule,
         FlexLayoutModule,
         MatInputModule,
+        MatIconModule,
         BrowserAnimationsModule,
         RouterTestingModule.withRoutes([
             {path: '', component: DummyComponent, canActivate: [LoggedInGuard]},
