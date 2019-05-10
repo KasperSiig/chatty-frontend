@@ -47,7 +47,7 @@ export class SendComponent implements OnInit {
 
   uploadFile(event) {
     const file = event.target.files[0];
-    return this.fs.uploadImage(file);
+    this.fs.uploadImage(file);
   }
 
 
