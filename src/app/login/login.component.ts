@@ -32,9 +32,10 @@ export class LoginComponent implements OnInit {
    * Gets chosen username, password and avatar and calls createUser method from UserService.
    * @param username and password the user has chosen
    */
-  onSubmit(username: string, password: string) {
+  onSubmit(username: string, password: string, email: string) {
     const userDTO = new UserDTO();
     userDTO.username = username;
+    userDTO.email = email;
     userDTO.password = password;
     userDTO.avatarUrl = this.imgUrls[this.selected];
     this.us.createUser(userDTO).subscribe(token => {

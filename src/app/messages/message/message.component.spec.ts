@@ -4,6 +4,8 @@ import { MessageComponent } from './message.component';
 import { MatCardModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { Message } from '../../shared/models/Message';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('MessageComponent', () => {
   let component: MessageComponent;
@@ -16,7 +18,9 @@ describe('MessageComponent', () => {
       ],
       imports: [
         MatCardModule,
-        FlexLayoutModule
+        FlexLayoutModule,
+        HttpClientModule,
+        HttpClientTestingModule
       ]
     })
       .compileComponents();

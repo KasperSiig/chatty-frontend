@@ -10,6 +10,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { User } from '../models/User';
 import { UserService } from '../services/user.service';
 import { BehaviorSubject, of } from 'rxjs';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 
 describe('HeaderComponent', () => {
@@ -28,7 +30,9 @@ describe('HeaderComponent', () => {
         FlexLayoutModule,
         AngularFireStorageModule,
         AngularFirestoreModule,
-        AngularFireModule.initializeApp(environment.config)
+        AngularFireModule.initializeApp(environment.config),
+        HttpClientModule,
+        HttpClientTestingModule
       ],
       declarations: [
         HeaderComponent

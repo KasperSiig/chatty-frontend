@@ -74,8 +74,8 @@ export class UserService {
   }
 
   /**
-   *
-   * @param token
+   * Saves the JWT token to localstorage
+   * @param JWT token
    */
   saveToken(token: string) {
     localStorage.setItem('jwt', JSON.stringify(token));

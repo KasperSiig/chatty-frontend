@@ -8,6 +8,8 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -18,7 +20,9 @@ describe('AppComponent', () => {
         FlexLayoutModule,
         AngularFireStorageModule,
         AngularFirestoreModule,
-        AngularFireModule.initializeApp(environment.config)
+        AngularFireModule.initializeApp(environment.config),
+        HttpClientModule,
+        HttpClientTestingModule
       ],
       declarations: [
         AppComponent,

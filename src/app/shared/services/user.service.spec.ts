@@ -7,6 +7,8 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from '../../../environments/environment';
 import { BehaviorSubject, of } from 'rxjs';
 import { User } from '../models/User';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('UserService', () => {
   let angularFireStoreMock;
@@ -52,7 +54,9 @@ describe('UserService', () => {
       imports: [
         AngularFirestoreModule,
         AngularFireStorageModule,
-        AngularFireModule.initializeApp(environment.config)
+        AngularFireModule.initializeApp(environment.config),
+        HttpClientModule,
+        HttpClientTestingModule
       ],
       providers: [
         {provide: AngularFirestore, useValue: angularFireStoreMock},
