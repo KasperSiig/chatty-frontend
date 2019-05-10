@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../shared/models/User';
 import { UserService } from '../shared/services/user.service';
-import { forEach } from "@angular/router/src/utils/collection";
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
+import { UserDTO } from '../shared/models/dto/UserDTO';
 
 @Component({
   selector: 'app-login',
@@ -30,14 +29,17 @@ export class LoginComponent implements OnInit {
   }
 
   /**
-   * Gets chosen username and avatar and calls login method from UserService.
-   * @param username user have chosen
+   * Gets chosen username, password and avatar and calls createUser method from UserService.
+   * @param username and password the user has chosen
    */
-  onSubmit(username: string) {
-    const user = new User();
-    user.userName = username;
-    user.avatarUrl = this.imgUrls[this.selected];
-    this.us.login(user);
+  onSubmit(username: string, password: string) {
+    const userDTO = new UserDTO();
+    userDTO.username = username;
+    userDTO.password = password;
+    userDTO.avatarUrl = this.imgUrls[this.selected];
+    this.us.createUser(userDTO).subscribe(token => {
+      this.us.saveToken(token);
+    });
     this.router.navigate(['/']);
   }
 }

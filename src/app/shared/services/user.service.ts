@@ -5,6 +5,9 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { first, flatMap, map, mapTo } from 'rxjs/operators';
 import { Avatar } from '../models/Avatar';
 import { User } from '../models/User';
+import { UserDTO } from '../models/dto/UserDTO';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +17,8 @@ export class UserService {
   public user = new BehaviorSubject<User>(this.getUser());
 
   constructor(private storage: AngularFireStorage,
-              private db: AngularFirestore) {
+              private db: AngularFirestore,
+              private http: HttpClient) {
   }
 
   /**
@@ -47,11 +51,11 @@ export class UserService {
     this.user.next(this.getUser());
   }
 
-   /**
-    * Gets the user currently logged in
-    */
+  /**
+   * Gets the user currently logged in
+   */
   getUser(): User {
-     return JSON.parse(localStorage.getItem('user'));
+    return JSON.parse(localStorage.getItem('user'));
   }
 
   /**
@@ -59,5 +63,21 @@ export class UserService {
    */
   getUserObs(): Observable<User> {
     return this.user;
+  }
+
+  /**
+   *
+   * @param userDTO
+   */
+  createUser(userDTO: UserDTO): Observable<any> {
+    return this.http.post(environment.apiUrl + '/create', userDTO);
+  }
+
+  /**
+   *
+   * @param token
+   */
+  saveToken(token: string) {
+    localStorage.setItem('jwt', JSON.stringify(token));
   }
 }
