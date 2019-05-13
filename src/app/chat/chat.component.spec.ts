@@ -10,11 +10,16 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 import { SendComponent } from '../messages/send/send.component';
 import { MessageComponent } from '../messages/message/message.component';
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import {AngularFirestoreModule} from '@angular/fire/firestore';
-import {AngularFireStorageModule} from '@angular/fire/storage';
-import {AngularFireModule} from '@angular/fire';
-import {environment} from '../../environments/environment';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../../environments/environment';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { Component } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
+import { LoggedInGuard } from '../shared/guards/logged-in.guard';
+import { Router } from '@angular/router';
 
 describe('ChatComponent', () => {
   let component: ChatComponent;
@@ -23,13 +28,19 @@ describe('ChatComponent', () => {
   let dm: DOMHelper<ChatComponent>;
   let helper: Helper;
   let messageServiceMock: any;
+  let routerMock;
 
   beforeEach(async(() => {
     messageServiceMock = jasmine.createSpyObj('MessageService', ['recieve']);
     messageServiceMock.recieve.and.returnValue(of([]));
+
+    routerMock = jasmine.createSpyObj('Router', ['navigate']);
+    routerMock.navigate.and.returnValue('');
+
     TestBed.configureTestingModule({
       providers: [
-        {provide: MessageService, useValue: messageServiceMock}
+        {provide: MessageService, useValue: messageServiceMock},
+        {provide: Router, useValue: routerMock}
       ],
       imports: [
         BrowserAnimationsModule,
@@ -43,7 +54,9 @@ describe('ChatComponent', () => {
         FormsModule,
         AngularFirestoreModule,
         AngularFireStorageModule,
-        AngularFireModule.initializeApp(environment.config)
+        AngularFireModule.initializeApp(environment.config),
+        AngularFireAuthModule,
+        RouterTestingModule.withRoutes([]),
       ],
       declarations: [
         ChatComponent,
@@ -72,3 +85,9 @@ describe('ChatComponent', () => {
     expect(component.messages.length).toBe(1);
   });
 });
+
+@Component({
+  template: ''
+})
+class DummyComponent {
+}

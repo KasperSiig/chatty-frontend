@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   apiUrl: 'http://localhost:5001/chatty-dev-e0191/us-central1/api',
   config: {
-    apiKey: 'AIzaSyBrQWERBNwkTluzudNWc6-8s9xPWOkqpfI',
+    apiKey: 'AIzaSyACbHPVt411FxZXU2_BKGOiplHdq8dgWCI',
     authDomain: 'chatty-dev-e0191.firebaseapp.com',
     databaseURL: 'https://chatty-dev-e0191.firebaseio.com',
     projectId: 'chatty-dev-e0191',

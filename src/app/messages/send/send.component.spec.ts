@@ -89,6 +89,10 @@ describe('SendComponent', () => {
     fixture.detectChanges();
     expect(component.isDisabled).toBeTruthy();
   });
+
+  it('should send file to service', () => {
+    
+  });
 });
 
 

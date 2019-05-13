@@ -30,7 +30,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   /**
-   * Makes a check if scroll should be activated
+   * Makes a userCheck if scroll should be activated
    */
   ngAfterViewChecked() {
     if (this.messageCount !== this.messages.length) {
