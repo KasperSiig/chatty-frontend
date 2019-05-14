@@ -7,6 +7,8 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from '../../../environments/environment';
 import { BehaviorSubject, of } from 'rxjs';
 import { User } from '../models/User';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 describe('UserService', () => {
   let angularFireStoreMock;
@@ -14,9 +16,6 @@ describe('UserService', () => {
   let angularFireStorageMock;
   let refMock;
   let service: UserService;
-  let localStorageMock;
-  let store;
-  let userMock;
   beforeEach(() => {
     // Mock AngularFirestore
     angularFireStoreMock = jasmine.createSpyObj('AngularFireStore', ['collection']);
@@ -30,29 +29,13 @@ describe('UserService', () => {
     angularFireStorageMock.ref.and.returnValue(refMock);
     refMock.getDownloadURL.and.returnValue(of('https://example.com/avatar1.png'));
 
-    store = {};
-    localStorageMock = {
-      getItem: (key: string): string => {
-        return store[key];
-      },
-      setItem: (key: string, value: string) => {
-        store[key] = value;
-      }
-    };
-
-    spyOn(localStorage, 'getItem').and.callFake(localStorageMock.getItem);
-    spyOn(localStorage, 'setItem').and.callFake(localStorageMock.setItem);
-
-    userMock = new User();
-    userMock.userName = 'username';
-    userMock.avatarUrl = 'https://example.com/avatar1.png';
-    localStorageMock.setItem('user', JSON.stringify(userMock));
-
     TestBed.configureTestingModule({
       imports: [
         AngularFirestoreModule,
         AngularFireStorageModule,
-        AngularFireModule.initializeApp(environment.config)
+        AngularFireModule.initializeApp(environment.config),
+        AngularFireAuthModule,
+        HttpClientTestingModule
       ],
       providers: [
         {provide: AngularFirestore, useValue: angularFireStoreMock},
@@ -82,19 +65,9 @@ describe('UserService', () => {
 
   describe('User', () => {
     it('should be logged in', () => {
-      const userMock = {
-        userName: 'username',
-        avatarUrl: 'https://example.com/avatar1.png'
-      };
-      service.login(userMock);
-      expect(localStorageMock.getItem('user')).toBe(JSON.stringify(userMock));
     });
 
     it('should get logged in user', () => {
-      localStorageMock.setItem('user', JSON.stringify(userMock));
-      const user = service.getUser();
-      expect(user.avatarUrl).toBe(userMock.avatarUrl);
-      expect(user.userName).toBe(userMock.userName);
     });
 
     it('should return as observable', () => {

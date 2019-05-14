@@ -51,6 +51,10 @@ export class SendComponent implements OnInit {
    */
   async uploadFile(event) {
     const file = event.target.files[0];
+    if (file.type.split('/')[0] !== 'image') {
+      window.alert('The file is not an image!');
+      return;
+    }
     const base64 = await this.fs.getBase64(file) as string;
     this.fs.uploadImage(file, base64).subscribe();
   }
