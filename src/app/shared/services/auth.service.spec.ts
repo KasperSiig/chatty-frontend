@@ -3,7 +3,6 @@ import { AuthService } from './auth.service';
 import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../../../environments/environment';
-import { of } from 'rxjs';
 
 describe('AuthService', () => {
   let service: AuthService;
@@ -12,7 +11,6 @@ describe('AuthService', () => {
   beforeEach(() => {
     afAuthMock = jasmine.createSpyObj('AngularFireAuth', ['authState']);
     afAuthMock.auth = {currentUser: true};
-    afAuthMock.auth.signInWithEmailAndPassword.and.returnValue(of('').toPromise());
 
     TestBed.configureTestingModule({
       imports: [
