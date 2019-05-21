@@ -6,13 +6,19 @@ import { environment } from '../../../environments/environment';
 
 describe('AuthService', () => {
   let service: AuthService;
+  let afAuthMock: any;
 
   beforeEach(() => {
+    afAuthMock = jasmine.createSpyObj('AngularFireAuth', ['authState']);
+    afAuthMock.auth = {currentUser: true};
 
     TestBed.configureTestingModule({
       imports: [
         AngularFireAuthModule,
         AngularFireModule.initializeApp(environment.config)
+      ],
+      providers: [
+        {provide: AngularFireAuth, useValue: afAuthMock}
       ]
     });
 
@@ -24,5 +30,6 @@ describe('AuthService', () => {
   });
 
   it('should log user in', () => {
+    expect(service.isLoggedIn()).toBeTruthy();
   });
 });
