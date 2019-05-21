@@ -19,8 +19,9 @@ describe('HeaderComponent', () => {
   let userSvcMock: any;
 
   beforeEach(async(() => {
-    userSvcMock = jasmine.createSpyObj('UserService', ['getUserObs']);
+    userSvcMock = jasmine.createSpyObj('UserService', ['getUserObs', 'fetchUser']);
     userSvcMock.getUserObs.and.returnValue(of(new User()));
+    userSvcMock.fetchUser.and.returnValue(null);
 
     TestBed.configureTestingModule({
       imports: [

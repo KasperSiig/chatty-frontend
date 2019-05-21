@@ -1,22 +1,24 @@
 import { TestBed } from '@angular/core/testing';
 import { AuthService } from './auth.service';
+import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../../../environments/environment';
 
 describe('AuthService', () => {
-  let localStorageMock: any;
   let service: AuthService;
+  let afAuthMock: any;
+
   beforeEach(() => {
-
-    localStorageMock = {
-      getItem: (key: string): string => {
-        return '{"username": "username"}';
-      }
-    };
-
-    spyOn(localStorage, 'getItem').and.callFake(localStorageMock.getItem);
+    afAuthMock = jasmine.createSpyObj('AngularFireAuth', ['authState']);
+    afAuthMock.auth = {currentUser: true};
 
     TestBed.configureTestingModule({
+      imports: [
+        AngularFireAuthModule,
+        AngularFireModule.initializeApp(environment.config)
+      ],
       providers: [
-        {provide: localStorage, useValue: localStorageMock}
+        {provide: AngularFireAuth, useValue: afAuthMock}
       ]
     });
 
@@ -27,7 +29,7 @@ describe('AuthService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should return that user is logged in', () => {
+  it('should log user in', () => {
     expect(service.isLoggedIn()).toBeTruthy();
   });
 });

@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(private userSvc: UserService) { }
 
   ngOnInit() {
+    this.userSvc.fetchUser();
     this.subscription = this.userSvc.getUserObs().subscribe(user => {
       this.avatarUrl = user !== null ? user.avatarUrl : null;
     });

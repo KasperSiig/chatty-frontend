@@ -17,7 +17,7 @@ context('Assertions', () => {
         .should('have.text', 'Column content')
         .should('contain', 'Column content')
         .should('have.html', 'Column content')
-        // chai-jquery uses "is()" to check if element matches selector
+        // chai-jquery uses "is()" to userCheck if element matches selector
         .should('match', 'td')
         // to match text content against a regular expression
         // first need to invoke jQuery method text()
@@ -25,7 +25,7 @@ context('Assertions', () => {
         .invoke('text')
         .should('match', /column content/i)
 
-      // a better way to check element's text content against a regular expression
+      // a better way to userCheck element's text content against a regular expression
       // is to use "cy.contains"
       // https://on.cypress.io/contains
       cy.get('.assertion-table')

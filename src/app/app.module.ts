@@ -14,10 +14,20 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { LoginComponent } from './login/login.component';
-import { MatButtonModule, MatCardModule, MatFormFieldModule, MatIconModule, MatInputModule, MatToolbarModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule,
+  MatProgressSpinnerModule,
+  MatToolbarModule
+} from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxsModule } from '@ngxs/store';
 import { MessageState } from './shared/store/state/message.state';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +36,8 @@ import { MessageState } from './shared/store/state/message.state';
     ChatComponent,
     MessageComponent,
     SendComponent,
-    LoginComponent
+    LoginComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +51,7 @@ import { MessageState } from './shared/store/state/message.state';
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.config),
     AngularFirestoreModule,
+    AngularFireAuthModule,
     MatToolbarModule,
     MatCardModule,
     ReactiveFormsModule,
@@ -47,7 +59,8 @@ import { MessageState } from './shared/store/state/message.state';
     MatIconModule,
     NgxsModule.forRoot([
       MessageState
-    ])
+    ]),
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
