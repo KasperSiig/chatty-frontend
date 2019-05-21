@@ -18,6 +18,10 @@ import { Store } from '@ngxs/store';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { Component } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { Component } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
+import { LoggedInGuard } from '../shared/guards/logged-in.guard';
 import { Router } from '@angular/router';
 
 describe('ChatComponent', () => {
