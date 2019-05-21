@@ -12,7 +12,7 @@ export class AuthService {
    * Checks if user is logged in
    */
   isLoggedIn(): boolean {
-    console.log(this.auth.auth.currentUser);
+    console.log(this.auth);
     return !!this.auth.auth.currentUser;
   }
 }
