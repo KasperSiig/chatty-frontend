@@ -12,11 +12,6 @@ export class AuthService {
    * Checks if user is logged in
    */
   isLoggedIn(): boolean {
-<<<<<<< HEAD
-    console.log(this.auth);
-=======
-    console.log(this.auth.auth.currentUser);
->>>>>>> a1462b0a66298277ad9e6326b7d591c10f05fa8a
     return !!this.auth.auth.currentUser;
   }
 }
