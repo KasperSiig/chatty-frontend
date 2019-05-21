@@ -16,6 +16,8 @@ import { environment } from '../environments/environment';
 import { LoginComponent } from './login/login.component';
 import { MatButtonModule, MatCardModule, MatFormFieldModule, MatIconModule, MatInputModule, MatToolbarModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxsModule } from '@ngxs/store';
+import { MessageState } from './shared/store/state/message.state';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatCardModule,
     ReactiveFormsModule,
     FormsModule,
-    MatIconModule
+    MatIconModule,
+    NgxsModule.forRoot([
+      MessageState
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]

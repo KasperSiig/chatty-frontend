@@ -2,6 +2,7 @@ import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnDestroy, OnIn
 import { MessageService } from '../shared/services/message.service';
 import { Message } from '../shared/models/Message';
 import { Subscription } from 'rxjs';
+import { Store } from '@ngxs/store';
 
 @Component({
   selector: 'app-chat',
@@ -12,17 +13,19 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   @ViewChild('chat') chat: ElementRef;
 
-  messages: Message[] = [];
+  messages = [];
   messageCount = 0;
   subscription: Subscription;
 
-  constructor(private ms: MessageService) {
+  constructor(private ms: MessageService,
+              private store: Store) {
   }
 
   ngOnInit() {
-    this.subscription = this.ms.recieve().subscribe(messages => {
-      this.messages = messages;
-    });
+    this.subscription = this.store.select(state => state.messages.messages)
+      .subscribe(messages => {
+        this.messages = messages;
+      });
   }
 
   ngOnDestroy() {

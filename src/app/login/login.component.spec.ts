@@ -7,7 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
 import { UserService } from '../shared/services/user.service';
 import { Helper } from '../../testing/helper';
-import { DOMHelper } from '../../testing/dom-helper';
 import {Router} from '@angular/router';
 import {Component} from '@angular/core';
 import {RouterTestingModule} from '@angular/router/testing';
@@ -19,12 +18,11 @@ describe('LoginComponent', () => {
 
   let userServiceMock: any;
   let helper: Helper;
-  let dm: DOMHelper<LoginComponent>;
   let routerMock;
   beforeEach(async(() => {
     userServiceMock = jasmine.createSpyObj('UserService', ['login', 'getAllAvatarsNames', 'getAvatarDownloadURL']);
     userServiceMock.login.and.returnValue(of([]));
-    userServiceMock.getAllAvatarsNames.and.returnValue(of([]));
+    userServiceMock.getAllAvatarsNames.and.returnValue(of(['https://example.com/avatar1.png']));
     userServiceMock.getAvatarDownloadURL.and.returnValue(of([]));
     routerMock = jasmine.createSpyObj('Router', ['navigate']);
     routerMock.navigate.and.returnValue('');
@@ -57,7 +55,6 @@ describe('LoginComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
     helper = new Helper();
-    dm = new DOMHelper(fixture);
   });
 
   it('should create', () => {
@@ -68,6 +65,10 @@ describe('LoginComponent', () => {
     const user = helper.getUsers(1);
     component.onSubmit(user[0].userName);
     expect(userServiceMock.login).toHaveBeenCalledTimes(1);
+  });
+
+  it('should get download urls for avatars', () => {
+    console.log(component.imgUrls);
   });
 });
 
