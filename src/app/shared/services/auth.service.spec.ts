@@ -14,8 +14,6 @@ describe('AuthService', () => {
     afAuthMock.auth = {currentUser: true};
     afAuthMock.auth.signInWithEmailAndPassword.and.returnValue(of('').toPromise());
 
-    spyOn(afAuthMock.auth, 'signInWithEmailAndPassword');
-
     TestBed.configureTestingModule({
       imports: [
         AngularFireAuthModule,
