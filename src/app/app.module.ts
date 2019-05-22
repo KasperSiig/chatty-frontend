@@ -9,13 +9,11 @@ import { MessageComponent } from './messages/message/message.component';
 import { SendComponent } from './messages/send/send.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule } from '@angular/common/http';
-import { AngularFireStorageModule } from '@angular/fire/storage';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { environment } from '../environments/environment';
 import { LoginComponent } from './login/login.component';
 import { MatButtonModule, MatCardModule, MatFormFieldModule, MatIconModule, MatInputModule, MatToolbarModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FirebaseModule } from './shared/modules/firebase.module';
+import { MaterialModule } from './shared/modules/material.module';
 
 @NgModule({
   declarations: [
@@ -31,18 +29,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
-    MatButtonModule,
-    MatInputModule,
-    MatFormFieldModule,
     HttpClientModule,
-    AngularFireStorageModule,
-    AngularFireModule.initializeApp(environment.config),
-    AngularFirestoreModule,
-    MatToolbarModule,
-    MatCardModule,
     ReactiveFormsModule,
     FormsModule,
-    MatIconModule
+    FirebaseModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
