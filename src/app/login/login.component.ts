@@ -62,7 +62,9 @@ export class LoginComponent implements OnInit {
     this.us.create(createDTO)
       .subscribe(async () => {
         await this.auth.auth.signInWithEmailAndPassword(createDTO.email, createDTO.password);
-        this.router.navigate(['/chat']);
+        this.us.fetchUser().then(() => {
+          this.router.navigate(['/chat']);
+        });
       });
     return createDTO;
   }

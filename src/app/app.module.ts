@@ -26,6 +26,7 @@ import { NgxsModule } from '@ngxs/store';
 import { MessageState } from './shared/store/state/message.state';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { LoadingComponent } from './loading/loading.component';
+import { EditComponent } from './edit/edit.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { LoadingComponent } from './loading/loading.component';
     MessageComponent,
     SendComponent,
     LoginComponent,
-    LoadingComponent
+    LoadingComponent,
+    EditComponent
   ],
   imports: [
     BrowserModule,

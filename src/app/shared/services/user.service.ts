@@ -65,7 +65,7 @@ export class UserService {
    * Fetches user and sends it to BehaviorSubject
    */
   async fetchUser() {
-    const userCheck = await this.userCheck() as {displayName: string, photoURL: string};
+    const userCheck = await this.userCheck() as { displayName: string, photoURL: string };
     if (userCheck === undefined || userCheck === null) {
       this.user.next(null);
       return;
@@ -101,6 +101,19 @@ export class UserService {
    */
   create(createDTO: CreateDTO): Observable<any> {
     return this.http.post(environment.apiUrl + '/users/create', createDTO);
+  }
+
+  /**
+   * Updates the username of logged in user
+   * @param username New username of user
+   */
+  async update(username: string) {
+    await this.auth.auth.currentUser.updateProfile({displayName: username});
+    return this.fetchUser();
+  }
+
+  delete() {
+    return this.auth.auth.currentUser.delete();
   }
 }
 

@@ -17,13 +17,4 @@ export class Helper {
     }
     return this.messages;
   }
-
-  getUsers(amount: number) {
-    for (let i = 0; i < amount; i++) {
-      this.users.push(
-        {userName: 'Test name', avatarUrl: 'www.test.dk'}
-      );
-    }
-    return this.users;
-  }
 }
