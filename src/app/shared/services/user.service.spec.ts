@@ -141,5 +141,12 @@ describe('UserService', () => {
 
       req.flush(createDTO);
     });
+
+    it('should be updated', () => {
+      service.user = new BehaviorSubject<User>({userName: 'username', avatarUrl: 'https://example.com/avatar1.png'});
+      service.update('newUsername').then(() => {
+        expect(service.user.getValue().userName).toEqual('newUsername');
+      });
+    });
   });
 });

@@ -1,0 +1,33 @@
+<div class="container"
+  fxLayoutAlign="center">
+  <span fxFlex="80"
+    fxLayoutAlign="center center"
+    fxLayout="column"
+    fxLayoutGap="10px">
+    <span fxLayout="row"
+      fxLayoutAlign="center center"
+      fxLayoutGap="10px">
+      <h1 *ngIf="!isEditing">{{ user?.userName }}</h1>
+      <form [formGroup]="usernameForm" (submit)="onSubmit()">
+        <mat-form-field *ngIf="isEditing">
+          <input type="text"
+                 matInput
+                 value="{{ user?.userName }}"
+                 formControlName="username">
+        </mat-form-field>
+      <i class="material-icons"
+        fxLayoutAlign="center center"
+        *ngIf="!isEditing"
+        (click)="isEditing = !isEditing">edit</i>
+      <i class="material-icons"
+        fxLayoutAlign="center center"
+        *ngIf="isEditing"
+        (click)="onSubmit()">check</i>
+      </form>
+    </span>
+    <img src="{{ user?.avatarUrl }}" class="avatarLogo">
+    <button mat-raised-button
+            color="warn"
+            (click)="onDelete()">Delete Account</button>
+  </span>
+</div>
