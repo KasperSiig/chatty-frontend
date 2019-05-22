@@ -50,7 +50,6 @@ export class UserService {
    * @param password Password for User
    */
   async login(email: string, password: string) {
-    console.log(typeof this.auth.auth);
     await this.auth.auth.signInWithEmailAndPassword(email, password);
     this.fetchUser();
   }

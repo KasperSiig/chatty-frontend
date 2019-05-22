@@ -24,6 +24,8 @@ import {
   MatToolbarModule
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxsModule } from '@ngxs/store';
+import { MessageState } from './shared/store/state/message.state';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { LoadingComponent } from './loading/loading.component';
 
@@ -55,6 +57,9 @@ import { LoadingComponent } from './loading/loading.component';
     ReactiveFormsModule,
     FormsModule,
     MatIconModule,
+    NgxsModule.forRoot([
+      MessageState
+    ]),
     MatProgressSpinnerModule
   ],
   providers: [],

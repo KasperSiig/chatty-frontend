@@ -1,6 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ChatComponent } from './chat.component';
-import { DOMHelper } from '../../testing/dom-helper';
 import { Helper } from '../../testing/helper';
 import { HttpClientModule } from '@angular/common/http';
 import { MessageService } from '../shared/services/message.service';
@@ -15,6 +14,10 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../../environments/environment';
+import { Store } from '@ngxs/store';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { Component } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { Component } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -25,14 +28,16 @@ describe('ChatComponent', () => {
   let component: ChatComponent;
   let fixture: ComponentFixture<ChatComponent>;
 
-  let dm: DOMHelper<ChatComponent>;
   let helper: Helper;
   let messageServiceMock: any;
+  let storeMock: any;
   let routerMock;
 
   beforeEach(async(() => {
     messageServiceMock = jasmine.createSpyObj('MessageService', ['recieve']);
     messageServiceMock.recieve.and.returnValue(of([]));
+    storeMock = jasmine.createSpyObj('Store', ['select']);
+    storeMock.select.and.returnValue(of(['message']));
 
     routerMock = jasmine.createSpyObj('Router', ['navigate']);
     routerMock.navigate.and.returnValue('');
@@ -40,6 +45,7 @@ describe('ChatComponent', () => {
     TestBed.configureTestingModule({
       providers: [
         {provide: MessageService, useValue: messageServiceMock},
+        {provide: Store, useValue: storeMock},
         {provide: Router, useValue: routerMock}
       ],
       imports: [
@@ -70,7 +76,6 @@ describe('ChatComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ChatComponent);
     component = fixture.componentInstance;
-    dm = new DOMHelper(fixture);
     helper = new Helper();
     fixture.detectChanges();
   });
