@@ -3,10 +3,16 @@ import { Action, NgxsOnInit, Selector, State, StateContext } from '@ngxs/store';
 import { AddMessage } from '../actions/message.action';
 import { MessageService } from '../../services/message.service';
 
-class MessageStateModel {
+/**
+ * Contains the Model for the state
+ */
+export class MessageStateModel {
   messages: Message[];
 }
 
+/**
+ * Defines the state
+ */
 @State<MessageStateModel>({
   name: 'messages',
   defaults: {
@@ -18,6 +24,10 @@ export class MessageState implements NgxsOnInit {
   constructor(private messageSvc: MessageService) {
   }
 
+  /**
+   * Gets all messages
+   * @param state State to get messages from
+   */
   @Selector()
   static getMessages(state: MessageStateModel) {
     return state.messages;
@@ -29,6 +39,12 @@ export class MessageState implements NgxsOnInit {
     });
   }
 
+  /**
+   * Adds message to Firebase
+   * @param getState Is used to get current state
+   * @param patchState Is used to patch current state
+   * @param payload Message to be sent
+   */
   @Action(AddMessage)
   add({getState, patchState}: StateContext<MessageStateModel>, {payload}: AddMessage) {
     this.messageSvc.send(payload).subscribe();
