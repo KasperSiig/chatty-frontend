@@ -7,6 +7,9 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from '../../../environments/environment';
 import { BehaviorSubject, of } from 'rxjs';
 import { User } from '../models/User';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/auth';
+import { CreateDTO } from '../models/dto/CreateDTO';
 
 describe('UserService', () => {
   let angularFireStoreMock;
@@ -14,9 +17,14 @@ describe('UserService', () => {
   let angularFireStorageMock;
   let refMock;
   let service: UserService;
-  let localStorageMock;
-  let store;
-  let userMock;
+  let afAuthMock: any;
+  let httpMock: HttpTestingController;
+
+  const userMock = {
+    displayName: 'username',
+    photoURL: 'https://example.com/avatar1.png'
+  };
+
   beforeEach(() => {
     // Mock AngularFirestore
     angularFireStoreMock = jasmine.createSpyObj('AngularFireStore', ['collection']);
@@ -30,40 +38,37 @@ describe('UserService', () => {
     angularFireStorageMock.ref.and.returnValue(refMock);
     refMock.getDownloadURL.and.returnValue(of('https://example.com/avatar1.png'));
 
-    store = {};
-    localStorageMock = {
-      getItem: (key: string): string => {
-        return store[key];
-      },
-      setItem: (key: string, value: string) => {
-        store[key] = value;
-      }
-    };
+    // Mock AngularFireAuth
+    afAuthMock = {};
+    afAuthMock.auth = jasmine.createSpyObj('auth',
+      ['signInWithEmailAndPassword']);
 
-    spyOn(localStorage, 'getItem').and.callFake(localStorageMock.getItem);
-    spyOn(localStorage, 'setItem').and.callFake(localStorageMock.setItem);
-
-    userMock = new User();
-    userMock.userName = 'username';
-    userMock.avatarUrl = 'https://example.com/avatar1.png';
-    localStorageMock.setItem('user', JSON.stringify(userMock));
+    afAuthMock.auth.signInWithEmailAndPassword.and.returnValue(of([]).toPromise());
 
     TestBed.configureTestingModule({
       imports: [
         AngularFirestoreModule,
         AngularFireStorageModule,
-        AngularFireModule.initializeApp(environment.config)
+        AngularFireModule.initializeApp(environment.config),
+        AngularFireAuthModule,
+        HttpClientTestingModule
       ],
       providers: [
         {provide: AngularFirestore, useValue: angularFireStoreMock},
-        {provide: AngularFireStorage, useValue: angularFireStorageMock}
+        {provide: AngularFireStorage, useValue: angularFireStorageMock},
+        {provide: AngularFireAuth, useValue: afAuthMock}
       ]
     });
     service = TestBed.get(UserService);
+    httpMock = TestBed.get(HttpTestingController);
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
+  });
+
+  afterEach(() => {
+    httpMock.verify();
   });
 
   describe('Avatars', () => {
@@ -81,25 +86,60 @@ describe('UserService', () => {
   });
 
   describe('User', () => {
-    it('should be logged in', () => {
-      const userMock = {
-        userName: 'username',
-        avatarUrl: 'https://example.com/avatar1.png'
-      };
-      service.login(userMock);
-      expect(localStorageMock.getItem('user')).toBe(JSON.stringify(userMock));
-    });
-
-    it('should get logged in user', () => {
-      localStorageMock.setItem('user', JSON.stringify(userMock));
-      const user = service.getUser();
-      expect(user.avatarUrl).toBe(userMock.avatarUrl);
-      expect(user.userName).toBe(userMock.userName);
-    });
-
     it('should return as observable', () => {
       service.user = new BehaviorSubject<User>(new User());
       expect(service.getUserObs()).toBeTruthy();
+    });
+
+    it('should be logged in', () => {
+      service.login('test@test.com', 'password');
+      expect(afAuthMock.auth.signInWithEmailAndPassword).toHaveBeenCalledTimes(1);
+    });
+
+    it('should fetch user', () => {
+      service.user = new BehaviorSubject<User>(new User());
+
+      service.userCheck = function userCheck() {
+        return new Promise<any>(resolve => resolve(userMock));
+      };
+
+      service.fetchUser().then(() => {
+        const user = new User();
+        user.userName = 'username';
+        user.avatarUrl = 'https://example.com/avatar1.png';
+        expect(service.user.value).toEqual(user);
+      });
+    });
+
+    it('should fail to fetch user', () => {
+      service.user = new BehaviorSubject<User>(new User());
+
+      service.userCheck = function userCheck() {
+        return new Promise<any>(resolve => resolve(null));
+      };
+
+      service.fetchUser().then(() => {
+        const user = new User();
+        user.userName = 'username';
+        user.avatarUrl = 'https://example.com/avatar1.png';
+        expect(service.user.value).toEqual(null);
+      });
+    });
+
+    it('should create user', () => {
+      const createDTO = new CreateDTO();
+      createDTO.email = 'test@test.com';
+      createDTO.userName = 'username';
+      createDTO.password = 'password';
+      createDTO.avatarURL = 'https://example.com/avatar1.png';
+
+      service.create(createDTO).subscribe();
+
+      const req = httpMock.expectOne(environment.apiUrl + '/users/create');
+
+      expect(req.request.method).toEqual('POST');
+
+      req.flush(createDTO);
     });
   });
 });

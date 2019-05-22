@@ -1,7 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { SendComponent } from './send.component';
 import { HttpClientModule } from '@angular/common/http';
-import { DOMHelper } from '../../../testing/dom-helper';
 import { Helper } from '../../../testing/helper';
 import { of } from 'rxjs';
 import { MessageService } from '../../shared/services/message.service';
@@ -14,28 +13,33 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../../../environments/environment';
 import { FileService } from '../../shared/services/file.service';
+import { Store } from '@ngxs/store';
 
 describe('SendComponent', () => {
   let component: SendComponent;
   let fixture: ComponentFixture<SendComponent>;
 
-  let dm: DOMHelper<SendComponent>;
   let helper: Helper;
   let messageServiceMock: any;
   let fileServiceMock: any;
+  let storeMock: any;
 
   beforeEach(async(() => {
     fileServiceMock = jasmine.createSpyObj('FileService', ['uploadImage', 'getBase64']);
     fileServiceMock.uploadImage.and.returnValue(of([]));
-    fileServiceMock.getBase64.and.returnValue(new Promise((resolve) => {
-      resolve('');
-    }));
+    fileServiceMock.getBase64.and.returnValue(of([]).toPromise());
+
     messageServiceMock = jasmine.createSpyObj('MessageService', ['send']);
     messageServiceMock.send.and.returnValue(of([]));
+
+    storeMock = jasmine.createSpyObj('Store', ['dispatch']);
+    storeMock.dispatch.and.returnValue(of([]));
+
     TestBed.configureTestingModule({
       providers: [
         {provide: MessageService, useValue: messageServiceMock},
-        {provide: FileService, useValue: fileServiceMock}
+        {provide: FileService, useValue: fileServiceMock},
+        {provide: Store, useValue: storeMock}
       ],
       imports: [
         BrowserAnimationsModule,
@@ -60,7 +64,6 @@ describe('SendComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SendComponent);
     component = fixture.componentInstance;
-    dm = new DOMHelper(fixture);
     helper = new Helper();
     fixture.detectChanges();
   });
@@ -73,7 +76,7 @@ describe('SendComponent', () => {
     component.messageForm.get('message').setValue('test');
     component.send();
     fixture.detectChanges();
-    expect(messageServiceMock.send).toHaveBeenCalledTimes(1);
+    expect(storeMock.dispatch).toHaveBeenCalledTimes(1);
   });
 
   it('isDisabled should be false if input contains value', () => {

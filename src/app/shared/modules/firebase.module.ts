@@ -12,6 +12,12 @@ import { environment } from '../../../environments/environment';
     AngularFireStorageModule,
     AngularFirestoreModule,
     AngularFireModule.initializeApp(environment.config)
+  ],
+  exports: [
+    AngularFireAuthModule,
+    AngularFireStorageModule,
+    AngularFirestoreModule,
+    AngularFireModule
   ]
 })
 export class FirebaseModule { }

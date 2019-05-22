@@ -10,10 +10,22 @@ import { SendComponent } from './messages/send/send.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
-import { MatButtonModule, MatCardModule, MatFormFieldModule, MatIconModule, MatInputModule, MatToolbarModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule,
+  MatProgressSpinnerModule,
+  MatToolbarModule
+} from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FirebaseModule } from './shared/modules/firebase.module';
 import { MaterialModule } from './shared/modules/material.module';
+import { NgxsModule } from '@ngxs/store';
+import { MessageState } from './shared/store/state/message.state';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +34,8 @@ import { MaterialModule } from './shared/modules/material.module';
     ChatComponent,
     MessageComponent,
     SendComponent,
-    LoginComponent
+    LoginComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
@@ -33,6 +46,10 @@ import { MaterialModule } from './shared/modules/material.module';
     ReactiveFormsModule,
     FormsModule,
     FirebaseModule,
+    FormsModule,
+    NgxsModule.forRoot([
+      MessageState
+    ]),
     MaterialModule
   ],
   providers: [],

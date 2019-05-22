@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../shared/models/User';
 import { UserService } from '../shared/services/user.service';
-import { forEach } from "@angular/router/src/utils/collection";
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
+import { FormControl, FormGroup } from '@angular/forms';
+import { CreateDTO } from '../shared/models/dto/CreateDTO';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-login',
@@ -12,11 +14,24 @@ import {Router} from '@angular/router';
 export class LoginComponent implements OnInit {
 
   selected = 0;
-  hide = true;
+  hide = false;
   imgUrls = [];
 
+  createForm = new FormGroup({
+    username: new FormControl(''),
+    email: new FormControl(''),
+    password1: new FormControl(''),
+    password2: new FormControl('')
+  });
+
+  loginForm = new FormGroup({
+    email: new FormControl(''),
+    password: new FormControl('')
+  });
+
   constructor(private us: UserService,
-              private router: Router) {
+              private router: Router,
+              private auth: AngularFireAuth) {
   }
 
   ngOnInit() {
@@ -30,14 +45,34 @@ export class LoginComponent implements OnInit {
   }
 
   /**
-   * Gets chosen username and avatar and calls login method from UserService.
-   * @param username user have chosen
+   * Submits on Create
    */
-  onSubmit(username: string) {
-    const user = new User();
-    user.userName = username;
-    user.avatarUrl = this.imgUrls[this.selected];
-    this.us.login(user);
-    this.router.navigate(['/']);
+  onCreateSubmit() {
+    const form = this.createForm;
+    if (form.get('password1').value !== form.get('password2').value) {
+      return 'User was not created';
+    }
+
+    const createDTO = new CreateDTO();
+    createDTO.email = form.get('email').value;
+    createDTO.userName = form.get('username').value;
+    createDTO.password = form.get('password1').value;
+    createDTO.avatarURL = this.imgUrls[this.selected];
+
+    this.us.create(createDTO)
+      .subscribe(async () => {
+        await this.auth.auth.signInWithEmailAndPassword(createDTO.email, createDTO.password);
+        this.router.navigate(['/chat']);
+      });
+    return createDTO;
+  }
+
+  /**
+   * Submits on login
+   */
+  onLoginSubmit() {
+    const form = this.loginForm;
+    this.us.login(form.get('email').value, form.get('password').value);
+    this.router.navigate(['/chat']);
   }
 }

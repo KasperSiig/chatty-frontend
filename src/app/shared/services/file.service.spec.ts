@@ -8,6 +8,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorage, AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../../../environments/environment';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 describe('FileService', () => {
 
@@ -30,7 +31,8 @@ describe('FileService', () => {
         HttpClientTestingModule,
         AngularFirestoreModule,
         AngularFireStorageModule,
-        AngularFireModule.initializeApp(environment.config)
+        AngularFireModule.initializeApp(environment.config),
+        AngularFireAuthModule
       ],
       providers: [
         {provide: AngularFireStorage, useValue: angularFireStorageMock}

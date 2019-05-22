@@ -2,6 +2,8 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MessageService } from '../../shared/services/message.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FileService } from '../../shared/services/file.service';
+import { Store } from '@ngxs/store';
+import { AddMessage } from '../../shared/store/actions/message.action';
 
 @Component({
   selector: 'app-send',
@@ -19,7 +21,8 @@ export class SendComponent implements OnInit {
   @ViewChild('input') input: ElementRef;
 
   constructor(private messageService: MessageService,
-              private fs: FileService) {
+              private fs: FileService,
+              private store: Store) {
   }
 
   ngOnInit() {
@@ -30,7 +33,7 @@ export class SendComponent implements OnInit {
    * @param message Content of message to be sent
    */
   send() {
-    this.messageService.send(this.messageForm.get('message').value).subscribe();
+    this.store.dispatch(new AddMessage(this.messageForm.get('message').value));
     this.input.nativeElement.value = '';
     this.isMessage();
   }
@@ -51,9 +54,11 @@ export class SendComponent implements OnInit {
    */
   async uploadFile(event) {
     const file = event.target.files[0];
+    if (file.type.split('/')[0] !== 'image') {
+      window.alert('The file is not an image!');
+      return;
+    }
     const base64 = await this.fs.getBase64(file) as string;
     this.fs.uploadImage(file, base64).subscribe();
   }
-
-
 }
