@@ -40,6 +40,9 @@ export class EditComponent implements OnInit, OnDestroy {
     this.isEditing = !this.isEditing;
   }
 
+  /**
+   * Deletes the user currently logged in
+   */
   onDelete() {
     this.userSvc.delete().then(() => {
       this.router.navigate(['/']);
