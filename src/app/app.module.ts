@@ -9,10 +9,6 @@ import { MessageComponent } from './messages/message/message.component';
 import { SendComponent } from './messages/send/send.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule } from '@angular/common/http';
-import { AngularFireStorageModule } from '@angular/fire/storage';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { environment } from '../environments/environment';
 import { LoginComponent } from './login/login.component';
 import {
   MatButtonModule,
@@ -24,6 +20,8 @@ import {
   MatToolbarModule
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FirebaseModule } from './shared/modules/firebase.module';
+import { MaterialModule } from './shared/modules/material.module';
 import { NgxsModule } from '@ngxs/store';
 import { MessageState } from './shared/store/state/message.state';
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -44,23 +42,15 @@ import { LoadingComponent } from './loading/loading.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
-    MatButtonModule,
-    MatInputModule,
-    MatFormFieldModule,
     HttpClientModule,
-    AngularFireStorageModule,
-    AngularFireModule.initializeApp(environment.config),
-    AngularFirestoreModule,
-    AngularFireAuthModule,
-    MatToolbarModule,
-    MatCardModule,
     ReactiveFormsModule,
     FormsModule,
-    MatIconModule,
+    FirebaseModule,
+    FormsModule,
     NgxsModule.forRoot([
       MessageState
     ]),
-    MatProgressSpinnerModule
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]

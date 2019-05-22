@@ -10,19 +10,11 @@ import { MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule } fr
 import { SendComponent } from '../messages/send/send.component';
 import { MessageComponent } from '../messages/message/message.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFireStorageModule } from '@angular/fire/storage';
-import { AngularFireModule } from '@angular/fire';
-import { environment } from '../../environments/environment';
 import { Store } from '@ngxs/store';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { Component } from '@angular/core';
-import { RouterTestingModule } from '@angular/router/testing';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { Component } from '@angular/core';
-import { RouterTestingModule } from '@angular/router/testing';
-import { LoggedInGuard } from '../shared/guards/logged-in.guard';
 import { Router } from '@angular/router';
+import { FirebaseModule } from '../shared/modules/firebase.module';
+import { RouterTestingModule } from '@angular/router/testing';
+import { Component } from '@angular/core';
 
 describe('ChatComponent', () => {
   let component: ChatComponent;
@@ -58,11 +50,8 @@ describe('ChatComponent', () => {
         MatCardModule,
         ReactiveFormsModule,
         FormsModule,
-        AngularFirestoreModule,
-        AngularFireStorageModule,
-        AngularFireModule.initializeApp(environment.config),
-        AngularFireAuthModule,
         RouterTestingModule.withRoutes([]),
+        FirebaseModule
       ],
       declarations: [
         ChatComponent,
