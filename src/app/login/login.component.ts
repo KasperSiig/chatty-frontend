@@ -74,7 +74,9 @@ export class LoginComponent implements OnInit {
    */
   onLoginSubmit() {
     const form = this.loginForm;
-    this.us.login(form.get('email').value, form.get('password').value);
-    this.router.navigate(['/chat']);
+    this.us.login(form.get('email').value, form.get('password').value)
+      .then(() => {
+        this.router.navigate(['/chat']);
+      });
   }
 }

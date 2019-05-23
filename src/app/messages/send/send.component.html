@@ -7,7 +7,7 @@
     <mat-form-field class="inputChat"
                     appearance="standard">
       <mat-label>Message To Send</mat-label>
-      <input matInput placeholder="" formControlName="message" (keyup)="isMessage()" #input>
+      <input matInput placeholder="" formControlName="message" (keyup)="isMessage()" #input class="msgSend">
     </mat-form-field>
     <span class="spacer"></span>
     <button [disabled]="isDisabled" class="msgBtn" (click)="send()">Send Message</button>

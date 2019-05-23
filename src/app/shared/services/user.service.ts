@@ -51,7 +51,7 @@ export class UserService {
    */
   async login(email: string, password: string) {
     await this.auth.auth.signInWithEmailAndPassword(email, password);
-    this.fetchUser();
+    return this.fetchUser();
   }
 
   /**
@@ -112,8 +112,17 @@ export class UserService {
     return this.fetchUser();
   }
 
-  delete() {
-    return this.auth.auth.currentUser.delete();
+  /**
+   * Deletes user currently logged in
+   */
+  async delete() {
+    await this.auth.auth.currentUser.delete();
+    return this.fetchUser();
+  }
+
+  async logout() {
+    await this.auth.auth.signOut();
+    return this.fetchUser();
   }
 }
 
