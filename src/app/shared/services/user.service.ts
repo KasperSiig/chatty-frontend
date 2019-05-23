@@ -120,6 +120,9 @@ export class UserService {
     return this.fetchUser();
   }
 
+  /**
+   * Logs user out
+   */
   async logout() {
     await this.auth.auth.signOut();
     return this.fetchUser();

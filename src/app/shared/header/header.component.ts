@@ -27,6 +27,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  /**
+   * Logs user out
+   */
   onLogout() {
     this.userSvc.logout().then(() => {
       this.router.navigate(['/login']);
