@@ -26,7 +26,7 @@ describe('LoginComponent', () => {
   let routerMock;
   beforeEach(async(() => {
     userServiceMock = jasmine.createSpyObj('UserService', ['login', 'getAllAvatarsNames', 'getAvatarDownloadURL', 'create']);
-    userServiceMock.login.and.returnValue(of([]));
+    userServiceMock.login.and.returnValue(of([]).toPromise());
     userServiceMock.getAllAvatarsNames.and.returnValue(of(['https://example.com/avatar1.png']));
     userServiceMock.getAvatarDownloadURL.and.returnValue(of([]));
     userServiceMock.create.and.returnValue(of([]));

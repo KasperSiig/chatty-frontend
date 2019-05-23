@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +13,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   avatarUrl: string;
   subscription: Subscription;
 
-  constructor(private userSvc: UserService) { }
+  constructor(private userSvc: UserService,
+              private router: Router) { }
 
   ngOnInit() {
     this.userSvc.fetchUser();
@@ -23,5 +25,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  /**
+   * Logs user out
+   */
+  onLogout() {
+    this.userSvc.logout().then(() => {
+      this.router.navigate(['/login']);
+    })
   }
 }

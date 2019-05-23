@@ -14,11 +14,17 @@
       fxLayoutAlign="end center">
       <img
         fxLayoutAlign="center center"
-        class="avatarLogo"
+        class="avatarLogo headerAvatar"
         src="{{ avatarUrl }}"
         alt="AvatarLogo"
         *ngIf="avatarUrl"
         routerLink="edit">
+      <button
+        mat-raised-button
+        color="primary"
+        *ngIf="avatarUrl"
+        (click)="onLogout()"
+        class="logoutBtn">Logout</button>
     </div>
   </mat-toolbar>
 </div>
