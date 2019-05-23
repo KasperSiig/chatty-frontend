@@ -10,6 +10,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { User } from '../models/User';
 import { UserService } from '../services/user.service';
 import { BehaviorSubject, of } from 'rxjs';
+import { FirebaseModule } from '../modules/firebase.module';
+import { RouterTestingModule } from '@angular/router/testing';
 
 
 describe('HeaderComponent', () => {
@@ -27,9 +29,8 @@ describe('HeaderComponent', () => {
       imports: [
         MatToolbarModule,
         FlexLayoutModule,
-        AngularFireStorageModule,
-        AngularFirestoreModule,
-        AngularFireModule.initializeApp(environment.config)
+        FirebaseModule,
+        RouterTestingModule
       ],
       declarations: [
         HeaderComponent
