@@ -5,12 +5,13 @@ import { ChatComponent } from './chat/chat.component';
 import { LoggedInGuard } from './shared/guards/logged-in.guard';
 import { LoadingComponent } from './loading/loading.component';
 import { EditComponent } from './edit/edit.component';
+import { InitGuard } from './shared/guards/init.guard';
 
 const routes: Routes = [
   {path: '', component: LoadingComponent, pathMatch: 'full'},
-  {path: 'login', component: LoginComponent},
-  {path: 'chat', component: ChatComponent, canActivate: [LoggedInGuard]},
-  {path: 'edit', component: EditComponent, canActivate: [LoggedInGuard]},
+  {path: 'login', component: LoginComponent, canActivate: [InitGuard]},
+  {path: 'chat', component: ChatComponent, canActivate: [LoggedInGuard, InitGuard]},
+  {path: 'edit', component: EditComponent, canActivate: [LoggedInGuard, InitGuard]},
 ];
 
 @NgModule({

@@ -25,6 +25,7 @@ export class MessageService {
     message.content = content;
     message.sender = this.userSvc.getUser();
     message.time = new Date().getTime();
+    message.isFile = false;
     return this.http.post<any>(environment.apiUrl + '/message', message);
   }
 

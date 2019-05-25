@@ -22,6 +22,7 @@ export class UserService {
   }
 
   public user = new BehaviorSubject<User>(null);
+  authLoaded = false;
 
   /**
    * Get download url for all avatars, and then kill subscription
@@ -74,6 +75,7 @@ export class UserService {
     const user = new User();
     user.userName = userCheck.displayName;
     user.avatarUrl = userCheck.photoURL;
+    this.authLoaded = true;
     this.user.next(user);
   }
 
