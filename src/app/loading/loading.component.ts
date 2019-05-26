@@ -16,8 +16,11 @@ export class LoadingComponent implements AfterViewInit {
   async ngAfterViewInit() {
     const userCheck = await this.userSvc.userCheck();
     if (userCheck !== null || userCheck !== undefined) {
-      this.router.navigate(['/chat']);
+      this.router.navigate(['/chat'])
+        .then(data => console.log('succes: ' + data))
+        .catch(err => console.log(err));
     } else {
+      console.log('hello');
       this.router.navigate(['/login']);
     }
   }

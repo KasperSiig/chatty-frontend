@@ -75,7 +75,6 @@ export class UserService {
     const user = new User();
     user.userName = userCheck.displayName;
     user.avatarUrl = userCheck.photoURL;
-    this.authLoaded = true;
     this.user.next(user);
   }
 
@@ -85,6 +84,7 @@ export class UserService {
   userCheck() {
     return new Promise(resolve => {
       this.auth.auth.onAuthStateChanged(user => {
+        this.authLoaded = true;
         resolve(user);
       });
     });
